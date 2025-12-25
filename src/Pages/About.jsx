@@ -115,12 +115,12 @@ const AboutSection = () => {
                 />
               </div>
 
-              <h3 className="text-4xl font-bold text-white mb-2">Tumpa Das</h3>
+              <h3 className="text-4xl font-bold text-white mb-2">Abdul Mokim</h3>
               <p className="text-xl text-purple-300 mb-2">
                 MERN Stack Developer
               </p>
               <p className="text-gray-400 mb-8">
-                BBA (Marketing) - Southern University
+                diploma in computer science
               </p>
 
               {/* Skill Tags */}
