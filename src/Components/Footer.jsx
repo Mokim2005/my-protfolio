@@ -1,17 +1,18 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gray-950/90 backdrop-blur-md border-t border-gray-800 py-12 mt-20">
+    <footer className="relative w-full bg-gray-950/90 backdrop-blur-md border-t border-gray-800 py-12 mt-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
           
           {/* Left: Name / Tagline */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              YourName
+              Abdul Mokim
             </h3>
             <p className="text-gray-400 max-w-xs mx-auto md:mx-0">
               Passionate Full-Stack Developer crafting beautiful and functional web experiences.
@@ -23,24 +24,24 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                <Link to='/' className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                <Link to="/about" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#projects" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                <Link to="/my-project" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
                   Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                <Link to="/contact" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -51,7 +52,7 @@ const Footer = () => {
             <div className="flex justify-center md:justify-start gap-6">
               {/* GitHub */}
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/Mokim2005"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-3 bg-gray-800/50 rounded-xl hover:bg-purple-600/30 transition-all duration-300"
@@ -63,7 +64,7 @@ const Footer = () => {
 
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/abdul-mokim-810380352"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-3 bg-gray-800/50 rounded-xl hover:bg-purple-600/30 transition-all duration-300"
@@ -75,7 +76,7 @@ const Footer = () => {
 
               {/* Twitter / X */}
               <a
-                href="https://twitter.com/yourusername"
+                href="https://x.com/AbdulMokim40428"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-3 bg-gray-800/50 rounded-xl hover:bg-purple-600/30 transition-all duration-300"
@@ -87,7 +88,7 @@ const Footer = () => {
 
               {/* Email (optional) */}
               <a
-                href="mailto:your@email.com"
+                href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                 className="group p-3 bg-gray-800/50 rounded-xl hover:bg-purple-600/30 transition-all duration-300"
               >
                 <svg className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,11 +102,9 @@ const Footer = () => {
         {/* Bottom Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} <span className="text-purple-400 font-medium">YourName</span>. All rights reserved.
+            © {currentYear} <span className="text-purple-400 font-medium">Abdul Mokim</span>. All rights reserved.
           </p>
-          <p className="text-gray-600 text-xs mt-2">
-            Built with React, Tailwind CSS & ❤️
-          </p>
+
         </div>
       </div>
     </footer>

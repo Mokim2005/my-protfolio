@@ -7,6 +7,7 @@ import ContactSection from "../Pages/Send";
 import SkillSection from "../Components/SkilledSection";
 import MyProjects from "../Pages/MyProjects";
 import Forbidden from "../Pages/Forbidden";
+import DetailsPage from "../Pages/detalilsPage";
 
 const Router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const Router = createBrowserRouter([
       {
         path: "my-project",
         Component: MyProjects,
+      },
+      {
+        path: "details-page/:id",
+        Component: DetailsPage,
       },
     ],
   },
