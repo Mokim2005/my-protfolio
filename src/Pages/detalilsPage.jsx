@@ -1,99 +1,132 @@
-// components/ProjectDetails.jsx (আপডেটেড ভার্সন)
+// components/ProjectDetails.jsx (ফিক্সড ভার্সন)
 import React from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
   MapPin,
-  MessageCircle,
-  Calendar,
-  CheckCircle,
   Zap,
   Bell,
   ExternalLink,
   Github,
-} from "lucide-react";
-import { useParams, useNavigate } from "react-router-dom";
+  ArrowRight,
+  Package,
+  Truck,
+  Wallet,
+  Shield,
+  MapPinned,
+  ThumbsUp,
+  Crown,
+  CreditCard,
+  History, 
+  Users,
+  Lock,
+} from "lucide-react"; 
+import { useParams, useNavigate } from "react-router";
+
+
 
 const projectsDetails = {
   "amar-city-fix": {
-    title: "Amar City Fix",
-    tagline: "Report & Track City Issues in Real-Time",
+    title: "City Fix",
+    tagline: "Public Infrastructure Issue Reporting System",
     description:
-      "A citizen-centric platform that allows users to report urban problems like potholes, broken street lights, waste accumulation, and more. Authorities can track, assign, and resolve issues efficiently with location-based mapping.",
+      "A modern, responsive full-stack platform that empowers citizens to report public infrastructure issues (potholes, broken streetlights, garbage overflow, water leakage, damaged footpaths, etc.) and enables efficient management by municipal staff and admins.",
     tech: [
-      "React",
+      "React.js",
       "Node.js",
-      "Express",
+      "Express.js",
       "MongoDB",
-      "Mapbox GL JS",
-      "Cloudinary",
+      "Tailwind CSS",
+      "DaisyUI",
+      "Firebase Auth",
+      "TanStack Query",
+      "SSLCommerz",
+      "React-PDF",
     ],
     features: [
       {
         icon: MapPin,
-        text: "GPS-based issue reporting with photos & location",
+        text: "Citizen issue reporting with title, category, location & multiple photo uploads",
       },
       {
-        icon: CheckCircle,
-        text: "Real-time status updates and push notifications",
+        icon: ThumbsUp,
+        text: "Community upvote system – highlight urgent issues (one upvote per user)",
+      },
+      {
+        icon: Crown,
+        text: "Priority boost for ৳100 via SSLCommerz – boosted issues appear at the top",
+      },
+      {
+        icon: CreditCard,
+        text: "Premium subscription (৳1000) – unlimited reports, priority support & badge",
+      },
+      {
+        icon: Users,
+        text: "Role-based dashboards: Citizen, Staff (assigned issues only), Full Admin control",
+      },
+      {
+        icon: History,
+        text: "Detailed issue timeline tracking with status changes, timestamps & actor info",
+      }, // <-- এখানে History
+      {
+        icon: Lock,
+        text: "Secure authentication (Email/Google), JWT protection, blocked user restrictions",
+      },
+      {
+        icon: Bell,
+        text: "SweetAlert2 toasts for all actions, fully responsive mobile-first design",
+      },
+      {
+        icon: Wallet,
+        text: "SSLCommerz payments with downloadable PDF invoices (React-PDF)",
       },
       {
         icon: Zap,
-        text: "Admin dashboard for quick assignment & resolution tracking",
+        text: "Advanced filters, search, pagination, charts & stats in dashboards",
       },
     ],
     mockImage:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5955?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80",
+      "https://images.unsplash.com/photo-1516846279185-0305f8b1cb2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80", // Professional city reporting dashboard theme
     gradient: "from-orange-600 to-red-600",
-    liveLink: "https://amar-city-fix.vercel.app", // তোমার actual live link দিবে
-    clientLink: "https://github.com/yourusername/amar-city-fix-client",
-    serverLink: "https://github.com/yourusername/amar-city-fix-server",
+    liveLink: "https://city-fix-b6595.web.app",
+    clientLink: "https://github.com/Mokim2005/city-fix",
+    serverLink: "https://github.com/Mokim2005/city-fix-server",
   },
   "r-zap": {
-    title: "R Zap",
-    tagline: "Fast & Modern Real-Time Chat Application",
+    title: "Zap Shift",
+    tagline: "Fast & Modern Parcel Management Systems",
     description:
-      "A sleek, responsive real-time messaging app with one-on-one chats, group conversations, file sharing, typing indicators, read receipts, and message reactions.",
-    tech: ["Next.js", "Socket.io", "Tailwind CSS", "Prisma", "PostgreSQL"],
+      "Welcome to Zap Shift Resources! 🚀 A curated collection of tools, guides, and assets for developing robust Parcel Management Systems integrated with Zapier automation. Nationwide parcel delivery service covering all 64 districts of Bangladesh with role-based access for Users, Admins, and Riders.",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     features: [
-      { icon: MessageCircle, text: "Real-time messaging powered by Socket.io" },
-      { icon: Zap, text: "Typing indicators, online status & read receipts" },
-      { icon: Bell, text: "File sharing, emojis & message reactions" },
-    ],
-    mockImage:
-      "https://cdn.dribbble.com/users/143672/screenshots/18253947/media/8e8a1e2d8c8e9d1f3e8f2b8e9f1e2d3f.png?resize=1200x900",
-    gradient: "from-green-600 to-teal-600",
-    liveLink: "https://r-zap-chat-app.netlify.app",
-    clientLink: "https://github.com/yourusername/r-zap",
-    serverLink: "https://github.com/yourusername/r-zap-server",
-  },
-  "shif-project": {
-    title: "Shif Project",
-    tagline: "Smart Employee Shift Management System",
-    description:
-      "An intuitive shift scheduling tool for businesses. Managers can create schedules, employees can view, request, or swap shifts, and get automated reminders.",
-    tech: [
-      "React",
-      "Express",
-      "PostgreSQL",
-      "Node.js",
-      "Calendar API",
-      "Nodemailer",
-    ],
-    features: [
-      { icon: Calendar, text: "Drag & drop shift scheduling calendar" },
-      { icon: Bell, text: "Automated email/SMS reminders for shifts" },
       {
-        icon: CheckCircle,
-        text: "Shift swap requests & real-time attendance tracking",
+        icon: Package,
+        text: "Automated pricing calculation based on weight, type & destination",
+      },
+      {
+        icon: Truck,
+        text: "Real-time parcel tracking with status updates & notifications",
+      },
+      { icon: Shield, text: "OTP-based secure delivery confirmation" },
+      {
+        icon: Wallet,
+        text: "Transparent commission: 80% (same city) / 60% (outside city) for riders",
+      },
+      {
+        icon: MapPinned,
+        text: "Nationwide coverage across all 64 districts of Bangladesh",
+      },
+      {
+        icon: Zap,
+        text: "Role-based workflow: User booking → Admin assignment → Rider delivery",
       },
     ],
     mockImage:
-      "https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80",
-    gradient: "from-blue-600 to-indigo-600",
-    liveLink: "https://shif-project.vercel.app",
-    clientLink: "https://github.com/yourusername/shif-project-client",
-    serverLink: "https://github.com/yourusername/shif-project-server",
+      "https://s3-alpha.figma.com/hub/file/2232691010264742689/7947e2bd-6e44-4d80-89d0-3fb518e6109a-cover.png",
+    gradient: "from-green-600 to-teal-600",
+    liveLink: "https://zap-shift-14bf4.web.app",
+    clientLink: "https://github.com/Mokim2005/zap-shift-client",
+    serverLink: "https://github.com/Mokim2005/zap-shift-server",
   },
 };
 
@@ -282,6 +315,27 @@ const ProjectDetails = () => {
               />
             </a>
           </div>
+
+          {/* Admin Demo Credentials (Only for City Fix) */}
+          {id === "amar-city-fix" && (
+            <div className="mt-12 max-w-2xl mx-auto bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-4 text-center">
+                Admin Demo Access
+              </h3>
+              <div className="space-y-3 text-left">
+                <p className="text-gray-300">
+                  <span className="font-medium">Email:</span> asifs@gmail.com
+                </p>
+                <p className="text-gray-300">
+                  <span className="font-medium">Password:</span> 000000
+                </p>
+                <p className="text-sm text-gray-500 mt-4">
+                  Use these credentials to explore the full admin dashboard,
+                  staff panel, and payment features.
+                </p>
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </div>

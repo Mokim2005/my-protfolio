@@ -1,31 +1,26 @@
-// components/MyProjects.jsx
+// components/MyProjects.jsx (আপডেটেড – City Fix এর সঠিক & accurate details দিয়ে)
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import zapImage from '../assets/zap-shift.png';
+import cityImage from '../assets/city-fix.png';
 
 const projects = [
   {
     id: 'amar-city-fix',
-    title: 'Amar City Fix',
-    description: 'A platform for reporting and fixing city issues like potholes, street lights, waste management, etc. Users can submit problems with photos and track fixes.',
-    tech: ['React', 'Node.js', 'MongoDB', 'Mapbox'],
-    image: 'https://thumbs.dreamstime.com/b/pothole-street-road-damage-urban-infrastructure-issue-observe-highlighting-issues-representing-need-repair-366604053.jpg',
+    title: 'City Fix',
+    description: 'A full-stack public infrastructure issue reporting platform where citizens can report problems like potholes, broken streetlights, garbage overflow, etc.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Firebase Auth'],
+    image: cityImage
   },
   {
     id: 'r-zap',
-    title: 'R Zap',
-    description: 'A real-time chat application with modern UI, file sharing, and group chats. Fast and responsive messaging experience.',
-    tech: ['Next.js', 'Socket.io', 'Tailwind', 'Prisma'],
-    image: 'https://cdn.dribbble.com/userupload/35973859/file/original-d895e0cfd52dee4afe6ec44560fab73a.png',
-  },
-  {
-    id: 'shif-project',
-    title: 'Shif Project',
-    description: 'An employee shift management system for businesses. Schedule shifts, track attendance, and notify employees automatically.',
-    tech: ['React', 'Express', 'PostgreSQL', 'Calendar API'],
-    image: 'https://www.hyrestaff.com/wp-content/uploads/2020/08/shift-scheduling-calendar-image.svg',
-  },
+    title: 'Zap Shift',
+    description: 'A complete Parcel Management System for nationwide delivery across Bangladesh.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+    image: zapImage
+  }
 ];
 
 const ProjectCard = ({ project }) => {
