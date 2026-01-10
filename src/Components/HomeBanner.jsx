@@ -64,7 +64,7 @@ const HomeBanner = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden ">
       {/* Background Glow Blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
