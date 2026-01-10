@@ -194,7 +194,8 @@ const Navber = () => {
         {/* Hire Me Button */}
         <div className="navbar-end">
           <HashLink
-            to="/#contact"
+            to="https://mail.google.com/mail/u/0/#inbox"
+            target="_blank"
             smooth
             className="btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-lg px-6"
           >

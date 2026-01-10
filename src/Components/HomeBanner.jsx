@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "lucide-react";
+import { NavLink } from "react-router";
 
 const HomeBanner = () => {
   // ভাসমান অ্যানিমেশন কনফিগারেশন
@@ -51,7 +53,7 @@ const HomeBanner = () => {
     // },
     {
       src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-     pos: "top-[45%] left-[5%]",
+      pos: "top-[45%] left-[5%]",
       size: "w-16 md:w-20",
     },
     // {
@@ -136,17 +138,18 @@ const HomeBanner = () => {
           transition={{ delay: 0.4 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <a
-            href="#projects"
+          <NavLink 
+            to='/my-project'
             className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] transition-all duration-300 transform hover:-translate-y-1"
           >
             View Projects
-          </a>
+          </NavLink>
           <a
-            href="/cv.pdf"
+            href="https://docs.google.com/document/d/1PMXf1jmYjMe_i7s6sIcHoSKJ52TPp6saFqrVioPseac/edit?tab=t.0"
+            target="_blank"
             className="px-8 py-4 bg-white/5 text-white border border-white/10 font-bold rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-md"
           >
-            Download CV
+            Resume Hare
           </a>
         </motion.div>
       </div>
