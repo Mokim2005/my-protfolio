@@ -155,7 +155,7 @@ const HomeBanner = () => {
       </div>
 
       {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+      <div className="absolute bottom-0 w-full h-24"></div>
     </section>
   );
 };

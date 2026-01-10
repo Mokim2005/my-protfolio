@@ -73,9 +73,9 @@ const projectsDetails = {
     ],
     mockImage: cleanCityLogo,
     gradient: "from-emerald-600 to-teal-700",
-    liveLink: "https://clean-city-report.web.app", // আপনার লিংক এখানে বসান
-    clientLink: "https://github.com/Mokim2005/clean-city-client",
-    serverLink: "https://github.com/Mokim2005/clean-city-server",
+    liveLink: "https://clean-city-10.netlify.app",
+    clientLink: "https://github.com/Mokim2005/my-protfolio",
+    serverLink: "https://github.com/Mokim2005/my-protfolio",
   },
 
   // --- City Fix Project Details ---
