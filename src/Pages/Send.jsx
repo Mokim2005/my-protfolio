@@ -53,7 +53,7 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] relative overflow-hidden flex items-center justify-center px-4 py-12 md:py-20 font-sans">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center px-4 py-12 md:py-20 font-sans">
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       {/* Background Orbs */}
