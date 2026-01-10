@@ -67,7 +67,7 @@ const SkillCard = ({ skill, index }) => {
 
 const SkillSection = () => {
   return (
-    <section className="bg-[#050505] py-20 px-6">
+    <section className=" py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center mb-16 text-center">
           <motion.h2 
