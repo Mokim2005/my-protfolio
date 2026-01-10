@@ -1,160 +1,299 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  MapPin,
+  Zap,
+  Bell,
+  ExternalLink,
+  Github,
+  ArrowRight,
+  Package,
+  Truck,
+  Wallet,
+  Shield,
+  MapPinned,
+  ThumbsUp,
+  Crown,
+  CreditCard,
+  History,
+  Users,
+  Lock,
+  Camera,
+  Layers,
+  CheckCircle,
+} from "lucide-react";
+import { useParams, useNavigate } from "react-router";
 import zapImage from "../assets/zap-shift.png";
 import cityImage from "../assets/city-fix.png";
-import logo from "../assets/clean-city.png";
+import cleanCityLogo from "../assets/clean-city.png"; // CleanCity লোগো
 
-const projects = [
-  {
-    id: "clean-city",
+const projectsDetails = {
+  // --- CleanCity Project Details ---
+  "clean-city": {
     title: "CleanCity",
+    tagline: "Community-Driven Urban Cleanliness Platform",
     description:
-      "A community-driven platform for reporting urban cleanliness issues. Features real-time tracking, contribution reporting, and dark-theme synchronization.",
-    tech: ["React", "MongoDB", "Firebase", "Tailwind"],
-    image: logo,
-    accent: "from-emerald-900 to-teal-900", // Muted accent for dark look
-    liveLink: "#",
-    githubLink: "#",
+      "A specialized reporting tool designed to keep our environment clean. Citizens can quickly snap a photo of garbage or waste-related issues, pin the location, and report it to the community. Includes real-time tracking of cleanup progress.",
+    tech: [
+      "React.js",
+      "MongoDB",
+      "Node.js",
+      "Express.js",
+      "Firebase",
+      "Tailwind CSS",
+      "DaisyUI",
+      "Framer Motion",
+    ],
+    features: [
+      {
+        icon: Camera,
+        text: "Instant Photo Reporting – Capture cleanliness issues directly from the scene.",
+      },
+      {
+        icon: MapPinned,
+        text: "Geo-location Integration – Pin precise locations for garbage collection.",
+      },
+      {
+        icon: History,
+        text: "Live Status Tracking – See when a report moves from 'Reported' to 'Cleaned'.",
+      },
+      {
+        icon: Users,
+        text: "Public Community Feed – View all issues reported in your neighborhood.",
+      },
+      {
+        icon: Layers,
+        text: "Responsive Dashboard – Clean UI for managing personal reports and contributions.",
+      },
+      {
+        icon: CheckCircle,
+        text: "Resolved Issue Verification – Confirmation after a site has been cleaned.",
+      },
+    ],
+    mockImage: cleanCityLogo,
+    gradient: "from-emerald-600 to-teal-700",
+    liveLink: "https://clean-city-report.web.app", // আপনার লিংক এখানে বসান
+    clientLink: "https://github.com/Mokim2005/clean-city-client",
+    serverLink: "https://github.com/Mokim2005/clean-city-server",
   },
-  {
-    id: "amar-city-fix",
+
+  // --- City Fix Project Details ---
+  "amar-city-fix": {
     title: "City Fix",
+    tagline: "Public Infrastructure Issue Reporting System",
     description:
-      "Public infrastructure issue reporting platform for reporting potholes, broken streetlights, and garbage overflow with status updates.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: cityImage,
-    accent: "from-blue-900 to-indigo-900",
-    liveLink: "#",
-    githubLink: "#",
+      "A modern, responsive full-stack platform that empowers citizens to report public infrastructure issues and enables efficient management by municipal staff.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "SSLCommerz",
+      "React-PDF",
+      "TanStack Query",
+      "Firebase",
+    ],
+    features: [
+      {
+        icon: MapPin,
+        text: "Citizen issue reporting with multiple photo uploads",
+      },
+      {
+        icon: ThumbsUp,
+        text: "Community upvote system to highlight urgent issues",
+      },
+      { icon: Crown, text: "Priority boost for ৳100 via SSLCommerz payment" },
+      {
+        icon: History,
+        text: "Detailed issue timeline tracking with actor info",
+      },
+      { icon: Lock, text: "JWT protection & Role-based Access Control (RBAC)" },
+    ],
+    mockImage: cityImage,
+    gradient: "from-orange-600 to-red-600",
+    liveLink: "https://city-fix-b6595.web.app",
+    clientLink: "https://github.com/Mokim2005/city-fix",
+    serverLink: "https://github.com/Mokim2005/city-fix-server",
   },
-  {
-    id: "r-zap",
+
+  // --- Zap Shift Project Details ---
+  "r-zap": {
     title: "Zap Shift",
+    tagline: "Nationwide Parcel Management System",
     description:
-      "A complete Parcel Management System for nationwide delivery tracking, courier assignment, and management across Bangladesh.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: zapImage,
-    accent: "from-purple-900 to-pink-900",
-    liveLink: "#",
-    githubLink: "#",
+      "A complete delivery solution for Bangladesh with role-based access for Users, Admins, and Riders. Handles parcel lifecycle from booking to delivery.",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    features: [
+      { icon: Package, text: "Automated weight-based pricing calculation" },
+      {
+        icon: Truck,
+        text: "Real-time tracking for parcels and delivery status",
+      },
+      { icon: Wallet, text: "Automated rider commission management (80%/60%)" },
+      { icon: Shield, text: "Secure OTP-based delivery confirmation system" },
+    ],
+    mockImage: zapImage,
+    gradient: "from-blue-600 to-indigo-600",
+    liveLink: "https://zap-shift-14bf4.web.app",
+    clientLink: "https://github.com/Mokim2005/zap-shift-client",
+    serverLink: "https://github.com/Mokim2005/zap-shift-server",
   },
-];
+};
 
-const ProjectCard = ({ project }) => {
-  return (
-    <motion.div
-      className="group relative bg-[#0a0a0a] border border-white/5 rounded-[2rem] overflow-hidden shadow-none transition-all duration-500 hover:border-emerald-500/30"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* ইমেজ সেকশন - Muted with dark overlay */}
-      <div className="relative h-60 overflow-hidden bg-black">
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-60"
-        />
-        <div className="absolute inset-0 bg-black/40" />
+const ProjectDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const project = projectsDetails[id];
 
-        {/* Floating Github Icon */}
-        <div className="absolute top-5 right-5 flex gap-2">
-          <a
-            href={project.githubLink}
-            className="p-2 bg-white/5 backdrop-blur-md rounded-full text-slate-400 hover:text-emerald-500 transition-all border border-white/5"
+  if (!project) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl text-white mb-4">Project Not Found</h1>
+          <button
+            onClick={() => navigate(-1)}
+            className="text-emerald-500 hover:underline"
           >
-            <Github size={18} />
-          </a>
+            Go Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen  text-slate-300 transition-colors duration-500">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        <button
+          onClick={() => navigate(-1)}
+          className="group flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-all font-black uppercase tracking-widest text-xs"
+        >
+          <ArrowLeft
+            size={18}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
+          Back to Projects
+        </button>
+      </div>
+
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-8 pb-32">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div
+              className={`inline-block px-4 py-1 rounded-full bg-white/5 border border-white/5 text-transparent bg-clip-text bg-gradient-to-r ${project.gradient} text-[10px] font-black uppercase tracking-[0.3em] mb-8`}
+            >
+              Project Detail Case
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter uppercase">
+              {project.title}
+            </h1>
+            <p
+              className={`text-2xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r ${project.gradient}`}
+            >
+              {project.tagline}
+            </p>
+            <p className="text-lg text-slate-500 leading-relaxed mb-10 font-medium">
+              {project.description}
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="px-4 py-2 bg-white/5 border border-white/5 rounded-xl text-xs font-bold text-slate-400"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Screenshot Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl bg-[#0a0a0a]">
+              <img
+                src={project.mockImage}
+                alt={project.title}
+                className="w-full h-auto opacity-70 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      <div className="p-8">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-black tracking-tight text-slate-200 uppercase">
-            {project.title}
-          </h3>
-          <span
-            className={`h-1 w-8 rounded-full bg-gradient-to-r ${project.accent}`}
-          ></span>
+      {/* Features Grid */}
+      <div className=" py-32 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-8">
+          <h2 className="text-3xl font-black text-white mb-16 tracking-tighter">
+            TECHNICAL FEATURES
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {project.features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="p-8 bg-black border border-white/5 rounded-3xl hover:border-emerald-500/20 transition-all"
+              >
+                <div
+                  className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white mb-6 shadow-lg`}
+                >
+                  <feature.icon size={24} />
+                </div>
+                <p className="text-slate-400 font-medium leading-relaxed">
+                  {feature.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
 
-        <p className="text-sm text-slate-500 mb-6 leading-relaxed font-medium">
-          {project.description}
-        </p>
-
-        {/* টেকনোলজি ব্যাজ - No white backgrounds */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 bg-black text-slate-400 text-[9px] font-black uppercase tracking-[0.15em] rounded-md border border-white/5"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* অ্যাকশন বাটন */}
-        <div className="flex gap-3">
-          <Link to={`/details-page/${project.id}`} className="flex-1">
-            <button className="w-full py-4 bg-white/5 hover:bg-emerald-500/10 text-slate-300 hover:text-emerald-500 font-black rounded-xl border border-white/5 hover:border-emerald-500/20 transition-all active:scale-95 text-[10px] uppercase tracking-widest">
-              View Project
-            </button>
-          </Link>
+      {/* CTA Section */}
+      <div className="max-w-7xl mx-auto px-8 py-32 text-center">
+        <h2 className="text-4xl font-black text-white mb-12 tracking-tighter">
+          READY TO EXPLORE?
+        </h2>
+        <div className="flex flex-wrap justify-center gap-6">
           <a
             href={project.liveLink}
             target="_blank"
             rel="noreferrer"
-            className="p-4 bg-black border border-white/5 rounded-xl text-slate-400 hover:text-emerald-500 hover:border-emerald-500/20 transition-all flex items-center justify-center"
+            className="flex items-center gap-3 px-10 py-5 bg-white text-black font-black rounded-2xl hover:bg-emerald-500 hover:text-white transition-all text-xs uppercase tracking-widest"
           >
-            <ExternalLink size={20} />
+            <ExternalLink size={18} /> Live Demo
           </a>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const MyProjects = () => {
-  return (
-    <div className="min-h-screen bg-[#000000] py-24 px-6 md:px-12 relative overflow-hidden">
-      {/* Very subtle glow - no bright spots */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/5 text-emerald-900 text-[9px] font-black uppercase tracking-[0.3em]"
+          <a
+            href={project.clientLink}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 px-10 py-5 bg-white/5 text-white font-black rounded-2xl border border-white/10 hover:bg-white/10 transition-all text-xs uppercase tracking-widest"
           >
-            Archive 2024-25
-          </motion.div>
-          <motion.h2
-            className="text-5xl md:text-7xl font-black text-slate-200 tracking-tighter"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            <Github size={18} /> Frontend Repo
+          </a>
+          <a
+            href={project.serverLink}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 px-10 py-5 bg-white/5 text-white font-black rounded-2xl border border-white/10 hover:bg-white/10 transition-all text-xs uppercase tracking-widest"
           >
-            SELECTED <span className="text-slate-500">WORKS</span>
-          </motion.h2>
-          <p className="mt-6 text-slate-600 font-bold max-w-lg mx-auto leading-relaxed text-sm">
-            A focused look at applications developed using the MERN stack and
-            modern cloud infrastructures.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+            <Github size={18} /> Backend Repo
+          </a>
         </div>
       </div>
     </div>
   );
 };
 
-export default MyProjects;
+export default ProjectDetails;
