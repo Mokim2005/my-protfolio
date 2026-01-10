@@ -74,8 +74,8 @@ const projectsDetails = {
     mockImage: cleanCityLogo,
     gradient: "from-emerald-600 to-teal-700",
     liveLink: "https://clean-city-10.netlify.app",
-    clientLink: "https://github.com/Mokim2005/my-protfolio",
-    serverLink: "https://github.com/Mokim2005/my-protfolio",
+    clientLink: "https://github.com/Mokim2005/Community-Cleanliness-Issue-Reporting-Portal-repo",
+    serverLink: "https://github.com/Mokim2005/community-cleanliness-issue-reporting-portal-server",
   },
 
   // --- City Fix Project Details ---
