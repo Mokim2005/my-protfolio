@@ -1,0 +1,81 @@
+/* Service Section Premium Glass Styles */
+.service-glass-card {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 30, 0.6) 0%,
+    rgba(25, 25, 40, 0.5) 50%,
+    rgba(20, 20, 30, 0.6) 100%
+  );
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.4),
+    0 2px 8px 0 rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.service-glass-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 60px 0 rgba(0, 0, 0, 0.5),
+    0 8px 20px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+/* Gradient Heading */
+.gradient-heading {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #a855f7 30%,
+    #ec4899 60%,
+    #06b6d4 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-flow 8s ease infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Smooth 3D Transform */
+.service-glass-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Performance Optimization */
+.service-glass-card * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
