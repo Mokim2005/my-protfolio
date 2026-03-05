@@ -1,27 +1,12 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import {
-  FaReact,
-  FaNodeJs,
-  FaHtml5,
-  FaCss3Alt,
-  FaGitAlt,
-  FaCode,
-  FaSkiingNordic,
-  FaGithub,
+  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaCode, FaGithub,
 } from "react-icons/fa";
 
 import {
-  SiExpress,
-  SiTailwindcss,
-  SiJavascript,
-  SiMongodb,
-  SiPostman,
-  SiFigma,
-  SiFirebase,
-  SiNextdotjs,
-  SiPhoenixframework,
+  SiExpress, SiTailwindcss, SiJavascript, SiMongodb, SiPostman, SiFigma, SiFirebase, SiNextdotjs,
 } from "react-icons/si";
 
 const SkilledSection = () => {
@@ -46,36 +31,30 @@ const SkilledSection = () => {
       { name: "Git", icon: <FaGitAlt />, level: 90 },
       { name: "Github", icon: <FaGithub />, level: 95 },
       { name: "Postman", icon: <SiPostman />, level: 85 },
-      { name: "VS Code", icon: <FaCode />, level: 95 }, // ✅ Stable Icon
-      { name: "Kiro", icon: <FaSkiingNordic />, level: 90 }, // ✅ Stable Icon
+      { name: "VS Code", icon: <FaCode />, level: 95 },
       { name: "Figma", icon: <SiFigma />, level: 90 },
-      { name: "Pixo", icon: <SiPhoenixframework />, level: 80 },
     ],
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 ">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-20 px-4 text-white min-h-screen">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">
-          My{" "}
-          <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            Skills
-          </span>
-        </h2>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">My <span className="text-blue-400">Skills</span></h2>
+        </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12 flex-wrap">
-          {["frontend", "backend", "tools"].map((tab) => (
+        {/* Tab Buttons - Fixed Z-index and Click */}
+        <div className="flex justify-center gap-4 mb-12 relative z-10">
+          {Object.keys(skills).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-xl capitalize font-medium transition-all duration-300
-              ${
-                activeTab === tab
-                  ? "bg-indigo-600 text-white shadow-lg"
-                  : "bg-white/10 text-gray-300 hover:bg-white/20"
+              className={`px-6 py-2 rounded-xl capitalize transition-all duration-300 border ${
+                activeTab === tab 
+                ? "bg-blue-600 border-transparent shadow-lg shadow-blue-500/50 scale-105" 
+                : "bg-white/5 border-white/10 hover:bg-white/10"
               }`}
             >
               {tab}
@@ -84,41 +63,39 @@ const SkilledSection = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills[activeTab].map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white/5 backdrop-blur-xl border border-white/10
-              rounded-2xl p-6 hover:border-indigo-400/40
-              hover:shadow-xl hover:shadow-indigo-500/10
-              transition-all duration-300"
-            >
-              <div className="text-4xl mb-4 text-indigo-400 flex justify-center">
-                {skill.icon}
-              </div>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <AnimatePresence mode="wait">
+            {skills[activeTab].map((skill) => (
+              <motion.div
+                key={`${activeTab}-${skill.name}`} // Unique key for each tab change
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{ y: -5 }}
+                className="group relative bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300"
+              >
+                <div className="text-4xl text-blue-400 mb-4 flex justify-center">
+                  {skill.icon}
+                </div>
+                <h3 className="text-center text-xl font-semibold mb-4">{skill.name}</h3>
+                
+                {/* Progress Bar */}
+                <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.level}%` }}
+                    transition={{ duration: 1 }}
+                    className="h-full bg-blue-500"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-              <h3 className="text-lg font-semibold mb-3 text-white">
-                {skill.name}
-              </h3>
-
-              <div className="w-full bg-gray-700 h-2 rounded-full">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1 }}
-                  className="h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
-                />
-              </div>
-
-              <p className="text-sm text-gray-400 mt-2">
-                {skill.level}% Proficiency
-              </p>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
