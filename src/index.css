@@ -441,3 +441,23 @@ main {
 .delay-1000 {
   animation-delay: 1000ms;
 }
+
+
+/* Custom Scrollbar for Projects Section */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #06b6d4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #059669, #0891b2);
+}

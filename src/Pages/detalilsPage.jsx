@@ -1,40 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  MapPin,
-  Zap,
-  Bell,
   ExternalLink,
   Github,
-  ArrowRight,
   Package,
   Truck,
   Wallet,
   Shield,
   MapPinned,
-  ThumbsUp,
-  Crown,
-  CreditCard,
-  History,
-  Users,
-  Lock,
   Camera,
   Layers,
   CheckCircle,
+  History,
+  Users,
+  ThumbsUp,
+  Crown,
+  Lock,
+  Sparkles,
+  Rocket,
+  Code2,
+  Star,
 } from "lucide-react";
 import { useParams, useNavigate } from "react-router";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import zapImage from "../assets/zap-shift.png";
 import cityImage from "../assets/city-fix.png";
-import cleanCityLogo from "../assets/clean-city.png"; // CleanCity লোগো
+import cleanCityLogo from "../assets/clean-city.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projectsDetails = {
-  // --- CleanCity Project Details ---
   "clean-city": {
     title: "CleanCity",
     tagline: "Community-Driven Urban Cleanliness Platform",
     description:
-      "A specialized reporting tool designed to keep our environment clean. Citizens can quickly snap a photo of garbage or waste-related issues, pin the location, and report it to the community. Includes real-time tracking of cleanup progress.",
+      "Citizens can instantly report garbage issues by capturing photos and location. The system tracks progress from reported to resolved.",
     tech: [
       "React.js",
       "MongoDB",
@@ -42,255 +45,404 @@ const projectsDetails = {
       "Express.js",
       "Firebase",
       "Tailwind CSS",
-      "DaisyUI",
-      "Framer Motion",
     ],
     features: [
-      {
-        icon: Camera,
-        text: "Instant Photo Reporting – Capture cleanliness issues directly from the scene.",
-      },
-      {
-        icon: MapPinned,
-        text: "Geo-location Integration – Pin precise locations for garbage collection.",
-      },
-      {
-        icon: History,
-        text: "Live Status Tracking – See when a report moves from 'Reported' to 'Cleaned'.",
-      },
-      {
-        icon: Users,
-        text: "Public Community Feed – View all issues reported in your neighborhood.",
-      },
-      {
-        icon: Layers,
-        text: "Responsive Dashboard – Clean UI for managing personal reports and contributions.",
-      },
-      {
-        icon: CheckCircle,
-        text: "Resolved Issue Verification – Confirmation after a site has been cleaned.",
-      },
+      { icon: Camera, text: "Instant Photo Reporting" },
+      { icon: MapPinned, text: "Geo-location Integration" },
+      { icon: History, text: "Live Status Tracking" },
+      { icon: Users, text: "Community Issue Feed" },
+      { icon: Layers, text: "Responsive Dashboard" },
+      { icon: CheckCircle, text: "Resolved Issue Verification" },
     ],
     mockImage: cleanCityLogo,
-    gradient: "from-emerald-600 to-teal-700",
+    gradient: "from-emerald-500 to-teal-600",
     liveLink: "https://clean-city-10.netlify.app",
-    clientLink: "https://github.com/Mokim2005/Community-Cleanliness-Issue-Reporting-Portal-repo",
-    serverLink: "https://github.com/Mokim2005/community-cleanliness-issue-reporting-portal-server",
+    clientLink:
+      "https://github.com/Mokim2005/Community-Cleanliness-Issue-Reporting-Portal-repo",
+    serverLink:
+      "https://github.com/Mokim2005/community-cleanliness-issue-reporting-portal-server",
   },
 
-  // --- City Fix Project Details ---
   "amar-city-fix": {
     title: "City Fix",
-    tagline: "Public Infrastructure Issue Reporting System",
+    tagline: "Public Infrastructure Issue Reporting",
     description:
-      "A modern, responsive full-stack platform that empowers citizens to report public infrastructure issues and enables efficient management by municipal staff.",
-    tech: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Tailwind CSS",
-      "SSLCommerz",
-      "React-PDF",
-      "TanStack Query",
-      "Firebase",
-    ],
+      "A full-stack system enabling citizens to report infrastructure problems and municipalities to resolve them efficiently.",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     features: [
-      {
-        icon: MapPin,
-        text: "Citizen issue reporting with multiple photo uploads",
-      },
-      {
-        icon: ThumbsUp,
-        text: "Community upvote system to highlight urgent issues",
-      },
-      { icon: Crown, text: "Priority boost for ৳100 via SSLCommerz payment" },
-      {
-        icon: History,
-        text: "Detailed issue timeline tracking with actor info",
-      },
-      { icon: Lock, text: "JWT protection & Role-based Access Control (RBAC)" },
+      { icon: MapPinned, text: "Citizen Issue Reporting" },
+      { icon: ThumbsUp, text: "Community Upvote System" },
+      { icon: Crown, text: "Priority Boost via Payment" },
+      { icon: History, text: "Issue Timeline Tracking" },
+      { icon: Lock, text: "JWT Role-based Security" },
     ],
     mockImage: cityImage,
-    gradient: "from-orange-600 to-red-600",
+    gradient: "from-orange-500 to-red-600",
     liveLink: "https://city-fix-b6595.web.app",
     clientLink: "https://github.com/Mokim2005/city-fix",
     serverLink: "https://github.com/Mokim2005/city-fix-server",
   },
 
-  // --- Zap Shift Project Details ---
   "r-zap": {
     title: "Zap Shift",
-    tagline: "Nationwide Parcel Management System",
+    tagline: "Nationwide Parcel Delivery System",
     description:
-      "A complete delivery solution for Bangladesh with role-based access for Users, Admins, and Riders. Handles parcel lifecycle from booking to delivery.",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      "A complete logistics platform for parcel booking and delivery tracking.",
+    tech: ["React", "Node", "Express", "MongoDB", "Tailwind"],
     features: [
-      { icon: Package, text: "Automated weight-based pricing calculation" },
-      {
-        icon: Truck,
-        text: "Real-time tracking for parcels and delivery status",
-      },
-      { icon: Wallet, text: "Automated rider commission management (80%/60%)" },
-      { icon: Shield, text: "Secure OTP-based delivery confirmation system" },
+      { icon: Package, text: "Automated Pricing System" },
+      { icon: Truck, text: "Real-time Parcel Tracking" },
+      { icon: Wallet, text: "Rider Commission System" },
+      { icon: Shield, text: "OTP Delivery Confirmation" },
     ],
     mockImage: zapImage,
-    gradient: "from-blue-600 to-indigo-600",
+    gradient: "from-blue-500 to-indigo-600",
     liveLink: "https://zap-shift-14bf4.web.app",
     clientLink: "https://github.com/Mokim2005/zap-shift-client",
     serverLink: "https://github.com/Mokim2005/zap-shift-server",
   },
 };
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+};
+
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const featuresRef = useRef();
+  const heroRef = useRef();
+
   const project = projectsDetails[id];
+
+  useEffect(() => {
+    if (featuresRef.current) {
+      gsap.from(featuresRef.current.children, {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: "top 85%",
+        },
+      });
+    }
+  }, []);
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen flex items-center justify-center text-white"
+      >
         <div className="text-center">
-          <h1 className="text-4xl text-white mb-4">Project Not Found</h1>
+          <h2 className="text-2xl font-bold mb-4">Project Not Found</h2>
           <button
-            onClick={() => navigate(-1)}
-            className="text-emerald-500 hover:underline"
+            onClick={() => navigate("/")}
+            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl text-white font-semibold hover:scale-105 transition-all"
           >
-            Go Back
+            Return Home
           </button>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="min-h-screen  text-slate-300 transition-colors duration-500">
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-8 py-12">
+    <div className="min-h-screen text-slate-300 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(59,130,246,0.1),transparent_50%)]" />
+      </div>
+
+      {/* Back Button with Animation */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-6xl mx-auto px-4 pt-6 relative z-10"
+      >
         <button
           onClick={() => navigate(-1)}
-          className="group flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-all font-black uppercase tracking-widest text-xs"
+          className="group flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-all duration-300 hover:gap-3"
         >
           <ArrowLeft
             size={18}
             className="group-hover:-translate-x-1 transition-transform"
           />
-          Back to Projects
+          <span>Back to Projects</span>
         </button>
-      </div>
+      </motion.div>
 
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-8 pb-32">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Hero Section with Enhanced Design */}
+      <div
+        ref={heroRef}
+        className="max-w-6xl mx-auto px-4 py-10 md:py-14 relative z-10"
+      >
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <div
-              className={`inline-block px-4 py-1 rounded-full bg-white/5 border border-white/5 text-transparent bg-clip-text bg-gradient-to-r ${project.gradient} text-[10px] font-black uppercase tracking-[0.3em] mb-8`}
+            <motion.div variants={itemVariants} className="mb-6">
+              <span
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${project.gradient} text-white text-sm font-semibold shadow-lg`}
+              >
+                <Sparkles size={16} />
+                Featured Project
+              </span>
+            </motion.div>
+
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight"
             >
-              Project Detail Case
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter uppercase">
               {project.title}
-            </h1>
-            <p
-              className={`text-2xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r ${project.gradient}`}
+            </motion.h1>
+
+            <motion.p
+              variants={itemVariants}
+              className={`text-xl md:text-2xl font-medium mb-5 bg-gradient-to-r ${project.gradient} text-transparent bg-clip-text`}
             >
               {project.tagline}
-            </p>
-            <p className="text-lg text-slate-500 leading-relaxed mb-10 font-medium">
-              {project.description}
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-4">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="px-4 py-2 bg-white/5 border border-white/5 rounded-xl text-xs font-bold text-slate-400"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+            <motion.p
+              variants={itemVariants}
+              className="text-slate-400 mb-8 text-lg leading-relaxed"
+            >
+              {project.description}
+            </motion.p>
+
+            {/* Tech Stack with Hover Effects */}
+            <motion.div variants={itemVariants} className="mb-8">
+              <p className="text-sm uppercase tracking-wider text-slate-500 mb-4 flex items-center gap-2">
+                <Code2 size={16} />
+                Technology Stack
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {project.tech.map((tech, index) => (
+                  <motion.span
+                    key={tech}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 10px 30px -10px rgba(16, 185, 129, 0.3)",
+                    }}
+                    className="px-4 py-2 text-sm rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-300 cursor-default"
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Screenshot Card */}
+          {/* Right Image with Enhanced Hover */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            whileHover={{ scale: 1.02 }}
             className="relative group"
           >
-            <div className="absolute inset-0 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-2xl bg-[#0a0a0a]">
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:shadow-emerald-500/20 group-hover:border-emerald-500/30 transition-all duration-500">
               <img
                 src={project.mockImage}
                 alt={project.title}
-                className="w-full h-auto opacity-70 group-hover:opacity-100 transition-opacity"
+                className="w-full object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Features Grid */}
-      <div className=" py-32 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-3xl font-black text-white mb-16 tracking-tighter">
-            TECHNICAL FEATURES
+      {/* Features Section with Enhanced Cards */}
+      <div className="max-w-6xl mx-auto px-4 pb-16 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 flex items-center gap-3">
+            <Rocket className="text-emerald-400" size={32} />
+            Key Features
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {project.features.map((feature, idx) => (
+          <p className="text-slate-400 text-lg">
+            What makes this project stand out
+          </p>
+        </motion.div>
+
+        <div
+          ref={featuresRef}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {project.features.map((feature, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 20px 40px -20px rgba(16, 185, 129, 0.3)",
+              }}
+              className="group p-6 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300 relative overflow-hidden"
+            >
+              {/* Glow Effect on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/0 to-blue-500/0 group-hover:from-emerald-500/5 group-hover:via-transparent group-hover:to-blue-500/5 transition-all duration-500" />
+
               <div
-                key={idx}
-                className="p-8 bg-black border border-white/5 rounded-3xl hover:border-emerald-500/20 transition-all"
+                className={`w-12 h-12 mb-4 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
               >
-                <div
-                  className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-white mb-6 shadow-lg`}
-                >
-                  <feature.icon size={24} />
-                </div>
-                <p className="text-slate-400 font-medium leading-relaxed">
-                  {feature.text}
-                </p>
+                <feature.icon size={22} />
               </div>
-            ))}
-          </div>
+
+              <p className="text-base font-medium text-white mb-2">
+                {feature.text}
+              </p>
+              <p className="text-sm text-slate-500">
+                Advanced feature with seamless integration
+              </p>
+
+              {/* Decorative Element */}
+              <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-br from-white/5 to-transparent rounded-tl-full group-hover:scale-150 transition-transform duration-500" />
+            </motion.div>
+          ))}
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-8 py-32 text-center">
-        <h2 className="text-4xl font-black text-white mb-12 tracking-tighter">
-          READY TO EXPLORE?
-        </h2>
-        <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3 px-10 py-5 bg-white text-black font-black rounded-2xl hover:bg-emerald-500 hover:text-white transition-all text-xs uppercase tracking-widest"
+      {/* CTA Section with Enhanced Buttons */}
+      <div className="text-center pb-16 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto px-4"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Explore?
+          </h2>
+          <p className="text-slate-400 mb-8 text-lg">
+            Check out the live demo or dive into the code
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.a
+              href={project.liveLink}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 30px -10px rgba(16, 185, 129, 0.4)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:shadow-2xl transition-all duration-300 group"
+            >
+              <ExternalLink
+                size={18}
+                className="group-hover:rotate-12 transition-transform"
+              />
+              Live Demo
+              <Star
+                size={16}
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </motion.a>
+
+            <motion.a
+              href={project.clientLink}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 30px -10px rgba(59, 130, 246, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/50 transition-all duration-300 group"
+            >
+              <Github
+                size={18}
+                className="group-hover:rotate-12 transition-transform"
+              />
+              Frontend Code
+            </motion.a>
+
+            <motion.a
+              href={project.serverLink}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 30px -10px rgba(139, 92, 246, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300 group"
+            >
+              <Github
+                size={18}
+                className="group-hover:rotate-12 transition-transform"
+              />
+              Backend Code
+            </motion.a>
+          </div>
+
+          {/* Stats or Additional Info */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 flex justify-center gap-8 text-slate-500"
           >
-            <ExternalLink size={18} /> Live Demo
-          </a>
-          <a
-            href={project.clientLink}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3 px-10 py-5 bg-white/5 text-white font-black rounded-2xl border border-white/10 hover:bg-white/10 transition-all text-xs uppercase tracking-widest"
-          >
-            <Github size={18} /> Frontend Repo
-          </a>
-          <a
-            href={project.serverLink}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3 px-10 py-5 bg-white/5 text-white font-black rounded-2xl border border-white/10 hover:bg-white/10 transition-all text-xs uppercase tracking-widest"
-          >
-            <Github size={18} /> Backend Repo
-          </a>
-        </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Full Stack Application</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <span>Production Ready</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+              <span>Open Source</span>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
