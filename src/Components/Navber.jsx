@@ -64,14 +64,14 @@ const Navber = () => {
                 />
               </div>
 
-              <div className="hidden md:flex flex-col">
-                <span className="text-base font-bold text-white">
-                  M.A. Mokim
-                </span>
-                <span className="text-[9px] tracking-widest text-gray-400">
-                  Web Developer
-                </span>
-              </div>
+           <div className="hidden md:flex flex-col">
+                 <span className="text-base font-bold text-green">
+                   M.A. Mokim
+                 </span>
+                 <span className="text-[9px] tracking-widest text-gray-300">
+                   Web Developer
+                 </span>
+               </div>
             </a>
           </div>
 

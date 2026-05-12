@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+:root {
+  --bg-primary: #0a0a0a;
+  --color-green: #4ade80;
+  --color-amber: #f59e0b;
+}
+
 /* Custom Animations */
 @keyframes blob-1 {
   0%, 100% {
@@ -130,8 +136,8 @@
 /* Smooth Transitions */
 * {
   transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.3s;
 }
 
 /* Glassmorphism Navbar */
@@ -173,9 +179,9 @@
 
 /* Smooth Page Transitions */
 body {
-  background: #030712;
-  color: #ffffff;
-  overflow-x: hidden;
+   background: var(--bg-primary);
+   color: #ffffff;
+   overflow-x: hidden;
 }
 
 /* Remove default body margin for navbar */
