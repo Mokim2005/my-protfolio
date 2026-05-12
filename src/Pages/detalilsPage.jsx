@@ -28,40 +28,34 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import zapImage from "../assets/zap-shift.png";
 import cityImage from "../assets/city-fix.png";
-import cleanCityLogo from "../assets/clean-city.png";
+// import cleanCityLogo from "../assets/clean-city.png";
+import movieMatrixImage from "../assets/moviematrix.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const projectsDetails = {
-  "clean-city": {
-    title: "CleanCity",
-    tagline: "Community-Driven Urban Cleanliness Platform",
-    description:
-      "Citizens can instantly report garbage issues by capturing photos and location. The system tracks progress from reported to resolved.",
-    tech: [
-      "React.js",
-      "MongoDB",
-      "Node.js",
-      "Express.js",
-      "Firebase",
-      "Tailwind CSS",
-    ],
-    features: [
-      { icon: Camera, text: "Instant Photo Reporting" },
-      { icon: MapPinned, text: "Geo-location Integration" },
-      { icon: History, text: "Live Status Tracking" },
-      { icon: Users, text: "Community Issue Feed" },
-      { icon: Layers, text: "Responsive Dashboard" },
-      { icon: CheckCircle, text: "Resolved Issue Verification" },
-    ],
-    mockImage: cleanCityLogo,
-    gradient: "from-emerald-500 to-teal-600",
-    liveLink: "https://clean-city-10.netlify.app",
-    clientLink:
-      "https://github.com/Mokim2005/Community-Cleanliness-Issue-Reporting-Portal-repo",
-    serverLink:
-      "https://github.com/Mokim2005/community-cleanliness-issue-reporting-portal-server",
-  },
+"movie-matrix": {
+  title: "MovieMatrix",
+  tagline: "Cinematic Animated Movie Discovery UI",
+  description:
+    "A modern animated movie discovery frontend built with smooth transitions, cinematic hero sections, and interactive UI elements for an immersive browsing experience.",
+  tech: ["React.js", "Framer Motion", "GSAP", "Tailwind CSS"],
+
+  features: [
+    { icon: Sparkles, text: "Cinematic Hero Animations" },
+    { icon: Layers, text: "Smooth Page Transitions" },
+    { icon: Camera, text: "Movie Preview UI Cards" },
+    { icon: Rocket, text: "Highly Interactive Micro Animations" },
+    { icon: Code2, text: "Modern Component Architecture" },
+  ],
+
+  mockImage: movieMatrixImage, // 👉 use your imported image
+  gradient: "from-purple-500 to-pink-600",
+
+  liveLink: "https://movie-matrix-gilt.vercel.app",      
+  clientLink: "https://github.com/juhaer009/eg-movie_matrix-collaboration",    
+  serverLink: "https://github.com/juhaer009/movie-matrix-server",   
+},
 
   "amar-city-fix": {
     title: "City Fix",
