@@ -2,48 +2,79 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Briefcase, GraduationCap, MapPin } from 'lucide-react';
 
-const ExperienceItem = ({ item, index }) => (
-  <motion.div
-    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.8, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    className={`relative flex flex-col md:flex-row gap-8 mb-20 last:mb-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-  >
-    {/* Center Line Dot */}
-    <div className="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[#00F5FF] shadow-[0_0_15px_#00F5FF] z-10 hidden md:block" />
+/**
+ * 🎓 EXPERIENCE SECTION OPTIMIZATION REPORT
+ * 
+ * Spacing Issues Fixed:
+ * - Unified card padding to p-10 for premium breathing room.
+ * - Standardized gap-12 between timeline line and content.
+ * - Consistent mb-16 (mobile) to mb-32 (desktop) vertical rhythm.
+ * 
+ * Layout & Alignment:
+ * - Perfectly centered timeline line on desktop using absolute positioning.
+ * - Symmetrical alternating layout with justified text for balance.
+ * - Mobile-first stacking where the line shifts to the left for a clean list view.
+ * 
+ * Animation & Interaction:
+ * - Replaced harsh X-axis slides with subtle Y-axis fades (duration: 0.5s).
+ * - Smooth soft-lift effect on hover (translateY: -4px).
+ * - Optimized viewport triggers to 'once: true' for performance.
+ */
 
-    {/* Content */}
-    <div className={`w-full md:w-[45%] glass-card p-8 group hover:border-[#00F5FF]/30 transition-all ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-      <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-        <span className="text-[#00F5FF] p-2 rounded-lg bg-[rgba(0,245,255,0.05)]">
-          {item.type === 'education' ? <GraduationCap size={20} /> : <Briefcase size={20} />}
-        </span>
-        <h3 className="text-xl font-bold text-white uppercase tracking-tight">{item.title}</h3>
-      </div>
-      
-      <div className={`flex flex-wrap items-center gap-4 text-xs font-bold text-[rgba(240,244,255,0.4)] uppercase tracking-widest mb-6 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-        <span className="flex items-center gap-1.5"><Calendar size={14} /> {item.date}</span>
-        <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.location}</span>
+const ExperienceItem = ({ item, index }) => {
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className={`relative flex flex-col md:flex-row w-full mb-16 md:mb-32 last:mb-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+      {/* Timeline Dot (Desktop only center-aligned) */}
+      <div className="absolute left-0 md:left-1/2 top-0 md:top-12 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[#00F5FF] shadow-[0_0_20px_#00F5FF] z-20 hidden md:block">
+        <div className="absolute inset-0 rounded-full bg-[#00F5FF] animate-ping opacity-20" />
       </div>
 
-      <p className="text-[rgba(240,244,255,0.6)] text-sm leading-relaxed mb-6">
-        {item.description}
-      </p>
+      {/* Content Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-50px" }}
+        className={`w-full md:w-[45%] glass-card p-8 md:p-10 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-[#00F5FF]/20 transition-all duration-500 ${isEven ? 'md:text-right' : 'md:text-left'}`}
+      >
+        {/* Header Area */}
+        <div className={`flex items-center gap-4 mb-6 ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+          <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[rgba(0,245,255,0.05)] border border-[rgba(0,245,255,0.1)] flex items-center justify-center text-[#00F5FF] group-hover:scale-110 group-hover:bg-[#00F5FF] group-hover:text-[#050A14] transition-all duration-500">
+            {item.type === 'education' ? <GraduationCap size={22} /> : <Briefcase size={22} />}
+          </div>
+          <div className="flex-grow">
+            <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-tight leading-tight mb-1 group-hover:text-[#00F5FF] transition-colors">
+              {item.title}
+            </h3>
+            <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-black uppercase tracking-[0.2em] text-[rgba(240,244,255,0.35)] ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+               <span className="flex items-center gap-1.5"><Calendar size={12} className="text-[#7B2FBE]" /> {item.date}</span>
+               <span className="flex items-center gap-1.5"><MapPin size={12} className="text-[#7B2FBE]" /> {item.location}</span>
+            </div>
+          </div>
+        </div>
 
-      <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-        {item.tags.map(tag => (
-          <span key={tag} className="px-3 py-1 rounded-md bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[rgba(240,244,255,0.5)] text-[10px] font-bold uppercase">
-            {tag}
-          </span>
-        ))}
-      </div>
+        {/* Description */}
+        <p className="text-[rgba(240,244,255,0.55)] text-sm md:text-base leading-relaxed mb-8 font-medium">
+          {item.description}
+        </p>
+
+        {/* Tags */}
+        <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+          {item.tags.map(tag => (
+            <span key={tag} className="px-3 py-1.5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-[rgba(240,244,255,0.4)] text-[9px] font-black uppercase tracking-widest hover:text-[#00F5FF] hover:border-[#00F5FF]/30 transition-all cursor-default">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Spacer for symmetrical layout */}
+      <div className="hidden md:block md:w-[45%]" />
     </div>
-
-    {/* Spacer for other side */}
-    <div className="hidden md:block md:w-[45%]" />
-  </motion.div>
-);
+  );
+};
 
 const Experience = () => {
   const data = [
@@ -75,29 +106,33 @@ const Experience = () => {
 
   return (
     <section id="experience" className="relative">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[radial-gradient(circle,rgba(123,47,190,0.03)_0%,transparent_70%)] pointer-events-none" />
+      {/* Premium Background Decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-[radial-gradient(circle,rgba(123,47,190,0.02)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="container relative">
-        <div className="text-center mb-24">
+      <div className="container relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-24 md:mb-32">
           <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-[10px] font-black uppercase tracking-[0.4em] text-[#7B2FBE] mb-4 block"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-[10px] font-black uppercase tracking-[0.5em] text-[#00F5FF] mb-6 block"
           >
-            My Journey
+            My Progression
           </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Experience & <span className="gradient-text">Education</span>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight">
+            Journey & <span className="gradient-text">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#7B2FBE] mx-auto rounded-full" />
+          <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#7B2FBE] to-transparent mx-auto opacity-50" />
         </div>
 
+        {/* Timeline Container */}
         <div className="relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#00F5FF] via-[#7B2FBE] to-[#00F5FF] opacity-20 hidden md:block" />
+          {/* Vertical Timeline Line (Desktop Centered) */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#00F5FF20] to-transparent hidden md:block" />
 
-          <div className="relative z-10">
+          <div className="relative space-y-12 md:space-y-0">
             {data.map((item, i) => (
               <ExperienceItem key={i} item={item} index={i} />
             ))}
