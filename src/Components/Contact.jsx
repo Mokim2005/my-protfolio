@@ -30,7 +30,7 @@ const ContactField = ({ label, type = "text", placeholder, name }) => (
 const Contact = () => {
   const contactInfo = [
     { icon: <Mail size={22} />, label: "Email", value: "mamokim2005@gmail.com", href: "mailto:mamokim2005@gmail.com" },
-    { icon: <Phone size={22} />, label: "WhatsApp", value: "+880 1313-176523", href: "tel:+8801313176523" },
+    { icon: <Phone size={22} />, label: "WhatsApp", value: "+8801729434323", href: "tel:+8801729434323" },
     { icon: <MapPin size={22} />, label: "Location", value: "Dinajpur, Bangladesh", href: "#" }
   ];
 
