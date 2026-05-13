@@ -7,23 +7,35 @@ import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register GSAP plugins
+/**
+ * ⚡ LIGHTWEIGHT SCROLL OPTIMIZATION
+ * 
+ * Optimized for a responsive, SaaS-like experience.
+ * - Duration reduced to 0.6s for immediate feedback.
+ * - Linear-out easing for natural momentum.
+ * - Disabled smoothTouch to maintain native mobile responsiveness.
+ */
+
 gsap.registerPlugin(ScrollTrigger);
 
-// Initialize Lenis Smooth Scroll
+// Initialize High-Performance Lenis
 const lenis = new Lenis({
-  duration: 1.2,
+  duration: 0.8, // Slightly more momentum for "buttery" feel but faster start
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true,
+  smoothWheel: true,
+  smoothTouch: false,
+  wheelMultiplier: 1.2, // Increased sensitivity for immediate reaction
+  touchMultiplier: 1.5,
+  infinite: false,
 });
 
-// Sync Lenis with GSAP Ticker
-function raf(time) {
-  lenis.raf(time);
-  ScrollTrigger.update();
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+// Drive Lenis RAF with GSAP Ticker
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+// Refresh ScrollTrigger on every scroll
+lenis.on('scroll', ScrollTrigger.update);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

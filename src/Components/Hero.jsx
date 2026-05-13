@@ -226,10 +226,10 @@ const Hero = () => {
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 glass-card px-6 py-4 border-[rgba(0,245,255,0.3)] bg-[rgba(5,10,20,0.8)]"
+                className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-10 glass-card px-4 py-3 md:px-6 md:py-4 border-[rgba(0,245,255,0.3)] bg-[rgba(5,10,20,0.8)] z-20"
               >
-                <div className="text-[#00F5FF] font-black text-2xl">1+</div>
-                <div className="text-[rgba(240,244,255,0.5)] text-[10px] font-bold uppercase tracking-widest">Years Experience</div>
+                <div className="text-[#00F5FF] font-black text-xl md:text-2xl">1+</div>
+                <div className="text-[rgba(240,244,255,0.5)] text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Years Experience</div>
               </motion.div>
             </div>
           </motion.div>

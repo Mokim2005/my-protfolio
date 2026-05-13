@@ -1,99 +1,107 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Calendar, Briefcase, GraduationCap, MapPin } from 'lucide-react';
 
-const ExperienceItem = ({ exp, index }) => {
-  const isEven = index % 2 === 0;
+const ExperienceItem = ({ item, index }) => (
+  <motion.div
+    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, delay: index * 0.1 }}
+    viewport={{ once: true }}
+    className={`relative flex flex-col md:flex-row gap-8 mb-20 last:mb-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+  >
+    {/* Center Line Dot */}
+    <div className="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[#00F5FF] shadow-[0_0_15px_#00F5FF] z-10 hidden md:block" />
 
-  return (
-    <div className={`relative flex flex-col md:flex-row items-center justify-between mb-12 md:mb-24 w-full ${isEven ? 'md:flex-row-reverse' : ''}`}>
-      {/* Timeline Dot */}
-      <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#00F5FF] z-10 hidden md:block">
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-full bg-[#00F5FF] opacity-50 shadow-[0_0_15px_#00F5FF]"
-        />
+    {/* Content */}
+    <div className={`w-full md:w-[45%] glass-card p-8 group hover:border-[#00F5FF]/30 transition-all ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+      <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+        <span className="text-[#00F5FF] p-2 rounded-lg bg-[rgba(0,245,255,0.05)]">
+          {item.type === 'education' ? <GraduationCap size={20} /> : <Briefcase size={20} />}
+        </span>
+        <h3 className="text-xl font-bold text-white uppercase tracking-tight">{item.title}</h3>
+      </div>
+      
+      <div className={`flex flex-wrap items-center gap-4 text-xs font-bold text-[rgba(240,244,255,0.4)] uppercase tracking-widest mb-6 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+        <span className="flex items-center gap-1.5"><Calendar size={14} /> {item.date}</span>
+        <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.location}</span>
       </div>
 
-      {/* Content Card */}
-      <motion.div
-        initial={{ opacity: 0, x: isEven ? 60 : -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="w-full md:w-[45%] glass-card p-6 md:p-8"
-      >
-        <span className="text-sm font-bold text-[rgba(240,244,255,0.5)] uppercase tracking-widest block mb-2">
-          {exp.duration}
-        </span>
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{exp.company}</h3>
-        <h4 className="text-lg font-medium gradient-text mb-6 uppercase tracking-wide">{exp.role}</h4>
-        
-        <ul className="space-y-3">
-          {exp.points.map((point, i) => (
-            <li key={i} className="flex gap-3 text-[rgba(240,244,255,0.7)] text-sm leading-relaxed">
-              <span className="text-[#00F5FF] mt-1.5">•</span>
-              {point}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+      <p className="text-[rgba(240,244,255,0.6)] text-sm leading-relaxed mb-6">
+        {item.description}
+      </p>
 
-      {/* Spacing for mobile */}
-      <div className="w-full md:w-[45%] hidden md:block" />
+      <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+        {item.tags.map(tag => (
+          <span key={tag} className="px-3 py-1 rounded-md bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[rgba(240,244,255,0.5)] text-[10px] font-bold uppercase">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
-  );
-};
+
+    {/* Spacer for other side */}
+    <div className="hidden md:block md:w-[45%]" />
+  </motion.div>
+);
 
 const Experience = () => {
-  const experiences = [
+  const data = [
     {
-      company: "Stark Industries",
-      role: "Senior UI Engineer",
-      duration: "2022 - PRESENT",
-      points: [
-        "Leading the development of mission-critical dashboards using React and GSAP.",
-        "Architecting a custom design system with glassmorphism and real-time data sync.",
-        "Optimizing application performance by 40% through advanced memoization techniques."
-      ]
+      title: "Diploma in Computer Science",
+      type: "education",
+      date: "2023 - Present",
+      location: "Dinajpur, Bangladesh",
+      description: "Pursuing advanced technical education in computer science, focusing on algorithms, database management, and software engineering principles.",
+      tags: ["CS Foundations", "Data Structures", "Algorithms"]
     },
     {
-      company: "Wayne Enterprises",
-      role: "Frontend Developer",
-      duration: "2020 - 2022",
-      points: [
-        "Built responsive web interfaces for smart city infrastructure monitoring.",
-        "Implemented complex data visualizations using D3.js and SVG animations.",
-        "Collaborated with cross-functional teams to deliver pixel-perfect designs."
-      ]
+      title: "MERN Stack Development",
+      type: "experience",
+      date: "2024",
+      location: "Programming Hero",
+      description: "Intensive training and project-based learning in the MERN ecosystem. Mastered React, Node.js, Express, and MongoDB through complex full-stack builds.",
+      tags: ["React", "Node.js", "Express", "MongoDB"]
     },
     {
-      company: "Oscorp Technologies",
-      role: "Junior Web Developer",
-      duration: "2018 - 2020",
-      points: [
-        "Developed and maintained corporate websites using modern JavaScript frameworks.",
-        "Integrated REST APIs and handled global state management using Redux.",
-        "Assisted in UI/UX research and prototyping for internal tools."
-      ]
+      title: "Marketing Expert",
+      type: "experience",
+      date: "2022 - 2023",
+      location: "Programming Hero Platform",
+      description: "Leveraged technical knowledge to assist in marketing digital products, providing a unique bridge between product development and user acquisition.",
+      tags: ["Growth", "Digital Strategy", "User Experience"]
     }
   ];
 
   return (
-    <section id="experience">
+    <section id="experience" className="relative">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[radial-gradient(circle,rgba(123,47,190,0.03)_0%,transparent_70%)] pointer-events-none" />
+
       <div className="container relative">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Journey <span className="gradient-text">& Experience</span></h2>
-          <div className="w-20 h-1 bg-[#7B2FBE] mx-auto rounded-full" />
+        <div className="text-center mb-24">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[10px] font-black uppercase tracking-[0.4em] text-[#7B2FBE] mb-4 block"
+          >
+            My Journey
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            Experience & <span className="gradient-text">Education</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#7B2FBE] mx-auto rounded-full" />
         </div>
 
-        {/* Timeline Line */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-40 bottom-20 w-[2px] bg-gradient-to-b from-[#00F5FF] via-[#7B2FBE] to-[#00F5FF] hidden md:block" />
-
         <div className="relative">
-          {experiences.map((exp, i) => (
-            <ExperienceItem key={exp.company} exp={exp} index={i} />
-          ))}
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#00F5FF] via-[#7B2FBE] to-[#00F5FF] opacity-20 hidden md:block" />
+
+          <div className="relative z-10">
+            {data.map((item, i) => (
+              <ExperienceItem key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

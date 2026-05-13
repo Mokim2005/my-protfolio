@@ -8,60 +8,73 @@ import zapImg from "../assets/zap-shift.png";
 
 const ProjectCard = ({ project, index }) => (
   <motion.div
-    initial={{ opacity: 0, y: 60 }}
+    initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+    transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     viewport={{ once: true }}
-    className="glass-card group flex flex-col h-full overflow-hidden"
+    className="glass-card group flex flex-col h-full overflow-hidden hover:-translate-y-3 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
   >
-    {/* Thumbnail */}
+    {/* Thumbnail Container */}
     <div className="relative aspect-[16/10] overflow-hidden">
       <img 
         src={project.image} 
         alt={project.name}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050A14] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+      {/* Premium Overlay */}
+      <div className="absolute inset-0 bg-[#050A14CC] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-8 text-center">
+        <p className="text-[#00F5FF] text-[10px] font-black uppercase tracking-[0.3em] mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          Full Case Study
+        </p>
         <Link 
           to={`/project/${project.id}`}
-          className="w-full py-3 rounded-xl bg-white text-[#050A14] font-bold text-sm flex items-center justify-center gap-2 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500"
+          className="px-8 py-4 rounded-xl bg-[#00F5FF] text-[#050A14] font-black text-xs tracking-widest flex items-center justify-center gap-2 transform scale-90 group-hover:scale-100 transition-all duration-500 shadow-[0_0_30px_rgba(0,245,255,0.4)]"
         >
-          EXPLORE CASE STUDY <ArrowUpRight size={18} />
+          EXPLORE WORK <ArrowUpRight size={18} />
         </Link>
       </div>
       
-      {/* Category Tag */}
-      <div className="absolute top-4 left-4 px-3 py-1 rounded-lg bg-[rgba(5,10,20,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] text-[#F0F4FF] text-[10px] font-bold uppercase tracking-widest">
-        {project.category}
+      {/* Tech Chips on Image */}
+      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 group-hover:opacity-0 transition-opacity duration-300">
+        {project.tech.slice(0, 3).map((t) => (
+          <span key={t} className="px-3 py-1 rounded-full bg-[rgba(5,10,20,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] text-white text-[9px] font-bold uppercase tracking-wider">
+            {t}
+          </span>
+        ))}
       </div>
     </div>
 
-    {/* Body */}
-    <div className="p-8 flex flex-col flex-grow">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-2xl font-bold text-white group-hover:text-[#00F5FF] transition-colors">{project.name}</h3>
-        <div className="flex gap-3">
-          <a href={project.github} className="text-[rgba(240,244,255,0.4)] hover:text-white transition-colors">
+    {/* Content Body */}
+    <div className="p-8 md:p-10 flex flex-col flex-grow bg-gradient-to-b from-transparent to-[rgba(255,255,255,0.01)]">
+      <div className="flex justify-between items-center mb-6">
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7B2FBE]">{project.category}</span>
+        <div className="flex gap-4">
+          <a href={project.github} target="_blank" rel="noreferrer" className="text-[rgba(240,244,255,0.4)] hover:text-white transition-all transform hover:scale-125">
             <Github size={20} />
           </a>
-          <a href={project.live} className="text-[rgba(240,244,255,0.4)] hover:text-[#00F5FF] transition-colors">
+          <a href={project.live} target="_blank" rel="noreferrer" className="text-[rgba(240,244,255,0.4)] hover:text-[#00F5FF] transition-all transform hover:scale-125">
             <ExternalLink size={20} />
           </a>
         </div>
       </div>
 
-      <p className="text-[rgba(240,244,255,0.5)] text-sm mb-8 leading-relaxed line-clamp-3">
+      <h3 className="text-3xl font-bold text-white mb-6 group-hover:text-[#00F5FF] transition-colors leading-tight">
+        {project.name}
+      </h3>
+
+      <p className="text-[rgba(240,244,255,0.55)] text-base mb-8 leading-relaxed line-clamp-3 font-medium flex-grow">
         {project.description}
       </p>
 
-      {/* Tech Stack */}
-      <div className="flex flex-wrap gap-2 mt-auto">
-        {project.tech.map((t) => (
-          <span key={t} className="text-[10px] px-2.5 py-1 rounded-md bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[rgba(240,244,255,0.7)] font-medium">
-            {t}
-          </span>
-        ))}
+      {/* Action Footer */}
+      <div className="pt-8 border-t border-[rgba(255,255,255,0.05)] flex items-center justify-between">
+        <Link to={`/project/${project.id}`} className="text-[#00F5FF] text-[10px] font-black uppercase tracking-[0.2em] hover:tracking-[0.3em] transition-all">
+          View Details →
+        </Link>
+        <span className="text-[rgba(240,244,255,0.2)] text-[10px] font-black uppercase tracking-widest">
+          © 2024
+        </span>
       </div>
     </div>
   </motion.div>
@@ -72,56 +85,69 @@ const Projects = () => {
     {
       id: "movie-matrix",
       name: "MovieMatrix",
-      description: "A modern animated movie discovery frontend built with smooth transitions, cinematic hero sections, and interactive UI elements for an immersive browsing experience.",
+      description: "A cinematic film discovery platform featuring advanced GSAP animations, dynamic API integration, and a premium glassmorphism UI for movie enthusiasts.",
       image: movieImg,
       tech: ["React.js", "Framer Motion", "GSAP", "Tailwind CSS"],
-      category: "React",
-      live: "#",
-      github: "https://github.com/Mokim2005"
+      category: "Creative Frontend",
+      live: "https://movie-matrix-gilt.vercel.app",
+      github: "https://github.com/juhaer009/eg-movie_matrix-collaboration"
     },
     {
       id: "city-fix",
       name: "City Fix",
-      description: "Public infrastructure issue reporting platform for reporting potholes, broken streetlights, and garbage overflow. Connecting citizens with authorities.",
+      description: "A full-stack municipal issue reporting system enabling citizens to report infrastructure problems with real-time status tracking and admin dashboard.",
       image: cityImg,
       tech: ["React", "Node.js", "Express", "MongoDB", "Firebase"],
-      category: "Full Stack",
-      live: "#",
-      github: "https://github.com/Mokim2005"
+      category: "Full Stack System",
+      live: "https://city-fix-b6595.web.app",
+      github: "https://github.com/Mokim2005/city-fix"
     },
     {
       id: "zap-shift",
       name: "Zap Shift",
-      description: "A complete Parcel Management System for nationwide delivery tracking and management across Bangladesh, focusing on speed and reliability.",
+      description: "Comprehensive nationwide parcel delivery and logistics management platform featuring automated pricing, rider tracking, and secure delivery confirmation.",
       image: zapImg,
       tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
-      category: "Full Stack",
-      live: "#",
-      github: "https://github.com/Mokim2005"
+      category: "Logistics SaaS",
+      live: "https://zap-shift-14bf4.web.app",
+      github: "https://github.com/Mokim2005/zap-shift-client"
     }
   ];
 
   return (
-    <section id="projects" className="bg-[rgba(255,255,255,0.01)]">
+    <section id="projects">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Selected <span className="gradient-text">Portfolio</span>
+        <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
+          <div className="max-w-3xl text-center lg:text-left">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-[10px] font-black uppercase tracking-[0.4em] text-[#00F5FF] mb-4 block"
+            >
+              Featured Works
+            </motion.span>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-[1.05] tracking-tight">
+              Selected <br /><span className="gradient-text">Masterpieces</span>
             </h2>
-            <p className="text-[rgba(240,244,255,0.55)] text-lg leading-relaxed">
-              A collection of digital products I've built, ranging from cinematic frontends to complex full-stack ecosystem solutions.
-            </p>
           </div>
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 px-6 py-3 rounded-xl border border-[rgba(255,255,255,0.1)] text-white font-bold text-sm cursor-pointer hover:bg-[rgba(255,255,255,0.02)] transition-all"
+          <motion.a 
+            href="https://github.com/Mokim2005"
+            target="_blank"
+            rel="noreferrer"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4 px-10 py-5 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] text-white font-black text-xs tracking-widest hover:border-[#00F5FF]/40 hover:bg-[#00F5FF]/5 transition-all"
           >
-            VIEW ALL REPOS <Github size={18} />
-          </motion.div>
+            ALL PROJECTS <ArrowUpRight size={20} className="text-[#00F5FF]" />
+          </motion.a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* Responsive Grid System */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {projectData.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}

@@ -1,149 +1,101 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Github, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageSquare } from 'lucide-react';
 
-const ButtonText = ({ text, trigger }) => (
-  <span className="flex">
-    {text.split("").map((char, i) => (
-      <motion.span
-        key={`${trigger}-${i}`}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: i * 0.03, duration: 0.3 }}
-        style={{ display: "inline-block" }}
-      >
-        {char === " " ? "\u00A0" : char}
-      </motion.span>
-    ))}
-  </span>
+const ContactField = ({ label, type = "text", placeholder, name }) => (
+  <div className="mb-8 last:mb-0 group">
+    <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-[rgba(240,244,255,0.4)] mb-3 group-focus-within:text-[#00F5FF] transition-colors">
+      {label}
+    </label>
+    {type === "textarea" ? (
+      <textarea
+        name={name}
+        required
+        placeholder={placeholder}
+        rows="5"
+        className="w-full bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.08)] rounded-xl px-6 py-5 text-white placeholder-[rgba(240,244,255,0.2)] focus:outline-none focus:border-[#00F5FF] focus:ring-4 focus:ring-[rgba(0,245,255,0.05)] transition-all resize-none font-medium"
+      />
+    ) : (
+      <input
+        type={type}
+        name={name}
+        required
+        placeholder={placeholder}
+        className="w-full bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.08)] rounded-xl px-6 py-5 text-white placeholder-[rgba(240,244,255,0.2)] focus:outline-none focus:border-[#00F5FF] focus:ring-4 focus:ring-[rgba(0,245,255,0.05)] transition-all font-medium"
+      />
+    )}
+  </div>
 );
 
-const ContactField = ({ label, name, type = "text", placeholder, required = true }) => {
-  const [isFocused, setIsFocused] = useState(false);
-
-  return (
-    <div className="relative mb-8">
-      <motion.label
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: isFocused ? 1 : 0, y: isFocused ? -22 : 10 }}
-        className="absolute left-4 text-[10px] font-black text-[#00F5FF] uppercase tracking-[0.2em] pointer-events-none"
-      >
-        {label}
-      </motion.label>
-      {type === "textarea" ? (
-        <textarea
-          name={name}
-          required={required}
-          onFocus={() => setIsFocused(true)}
-          onBlur={(e) => setIsFocused(e.target.value !== "")}
-          placeholder={isFocused ? "" : placeholder}
-          rows="4"
-          className="w-full bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 text-[#F0F4FF] text-sm outline-none focus:border-[#00F5FF] focus:ring-4 focus:ring-[rgba(0,245,255,0.1)] transition-all duration-300 resize-none"
-        />
-      ) : (
-        <input
-          type={type}
-          name={name}
-          required={required}
-          onFocus={() => setIsFocused(true)}
-          onBlur={(e) => setIsFocused(e.target.value !== "")}
-          placeholder={isFocused ? "" : placeholder}
-          className="w-full bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 text-[#F0F4FF] text-sm outline-none focus:border-[#00F5FF] focus:ring-4 focus:ring-[rgba(0,245,255,0.1)] transition-all duration-300"
-        />
-      )}
-    </div>
-  );
-};
-
 const Contact = () => {
-  const [btnHover, setBtnHover] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
-  const formRef = useRef(null);
+  const contactInfo = [
+    { icon: <Mail size={22} />, label: "Email", value: "mamokim2005@gmail.com", href: "mailto:mamokim2005@gmail.com" },
+    { icon: <Phone size={22} />, label: "WhatsApp", value: "+880 1313-176523", href: "tel:+8801313176523" },
+    { icon: <MapPin size={22} />, label: "Location", value: "Dinajpur, Bangladesh", href: "#" }
+  ];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch("https://formspree.io/f/mojaoopp", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        formRef.current?.reset();
-        alert("Message sent successfully!");
-      }
-    } catch (err) {
-      alert("Failed to send message.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const socialLinks = [
+    { icon: <Github size={20} />, href: "https://github.com/Mokim2005" },
+    { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/abdul-mokim-810380352" },
+    { icon: <Twitter size={20} />, href: "https://x.com/AbdulMokim40428" }
+  ];
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[rgba(255,255,255,0.01)]">
-      {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[rgba(123,47,190,0.05)] blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[rgba(0,245,255,0.03)] blur-[100px] rounded-full pointer-events-none" />
-
+    <section id="contact" className="relative overflow-hidden">
+      {/* Decorative Glows */}
+      <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[rgba(123,47,190,0.03)] blur-[150px] rounded-full pointer-events-none" />
+      
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-32">
+          
           {/* Left: Info */}
           <div>
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 leading-tight">
-                Let's Build <br />
-                <span className="gradient-text">Something Great</span>
+              <motion.span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#00F5FF] mb-6 block">
+                Get In Touch
+              </motion.span>
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-tight">
+                Let's Build <br /><span className="gradient-text">Greatness</span>
               </h2>
-              <p className="text-[rgba(240,244,255,0.6)] text-lg mb-12 max-w-md leading-relaxed">
-                Have a vision? Let’s turn it into reality. Reach out via the form or my social channels. I'm always open to new opportunities.
+              <p className="text-[rgba(240,244,255,0.5)] text-lg md:text-xl mb-16 leading-relaxed max-w-xl font-medium">
+                I'm currently available for freelance projects and full-time opportunities. If you have an idea you'd like to bring to life, let's chat.
               </p>
 
-              <div className="space-y-8 mb-12">
-                <div className="flex items-center gap-6 group">
-                  <div className="w-14 h-14 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[#00F5FF] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] group-hover:border-[rgba(0,245,255,0.3)] transition-all">
-                    <Mail size={22} />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-[rgba(240,244,255,0.4)] uppercase font-black tracking-[0.2em] mb-1">Email</div>
-                    <div className="text-[#F0F4FF] font-medium">mamokim2005@gmail.com</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6 group">
-                  <div className="w-14 h-14 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[#00F5FF] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,245,255,0.3)] group-hover:border-[rgba(0,245,255,0.3)] transition-all">
-                    <Phone size={22} />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-[rgba(240,244,255,0.4)] uppercase font-black tracking-[0.2em] mb-1">Phone</div>
-                    <div className="text-[#F0F4FF] font-medium">+880 1729434323</div>
-                  </div>
-                </div>
+              <div className="space-y-8 mb-16">
+                {contactInfo.map((info, i) => (
+                  <motion.a
+                    key={i}
+                    href={info.href}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-8 group"
+                  >
+                    <div className="w-16 h-16 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[rgba(240,244,255,0.3)] group-hover:text-[#00F5FF] group-hover:border-[rgba(0,245,255,0.3)] group-hover:scale-110 transition-all duration-300">
+                      {info.icon}
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[rgba(240,244,255,0.2)] mb-1">{info.label}</div>
+                      <div className="text-xl font-bold text-white group-hover:text-[#00F5FF] transition-colors">{info.value}</div>
+                    </div>
+                  </motion.a>
+                ))}
               </div>
 
               <div className="flex gap-4">
-                {[
-                  { icon: <Twitter size={20} />, href: "https://x.com/AbdulMokim40428" },
-                  { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/abdul-mokim-810380352" },
-                  { icon: <Github size={20} />, href: "https://github.com/Mokim2005" }
-                ].map((social, i) => (
+                {socialLinks.map((social, i) => (
                   <motion.a
                     key={i}
                     href={social.href}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ y: -8, scale: 1.15, color: "#00F5FF" }}
-                    className="w-14 h-14 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[rgba(240,244,255,0.6)] transition-all"
+                    rel="noreferrer"
+                    whileHover={{ y: -5, backgroundColor: "rgba(0,245,255,0.1)", color: "#00F5FF" }}
+                    className="w-14 h-14 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[rgba(240,244,255,0.4)] transition-all"
                   >
                     {social.icon}
                   </motion.a>
@@ -154,29 +106,31 @@ const Contact = () => {
 
           {/* Right: Form */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="glass-card p-10 md:p-12"
+            className="glass-card p-10 md:p-16 border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.01)] backdrop-blur-3xl"
           >
-            <form ref={formRef} onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <ContactField label="Name" name="name" placeholder="Your Name" />
-                <ContactField label="Email" name="email" type="email" placeholder="Your Email" />
-              </div>
-              <ContactField label="Subject" name="subject" placeholder="What are you looking for?" />
-              <ContactField label="Message" name="message" type="textarea" placeholder="Tell me about your project..." />
+            <div className="flex items-center gap-4 mb-12">
+               <div className="w-12 h-[2px] bg-[#00F5FF]" />
+               <h3 className="text-2xl font-bold text-white uppercase tracking-tight flex items-center gap-3">
+                  <MessageSquare className="text-[#00F5FF]" /> Send Message
+               </h3>
+            </div>
+
+            <form action="https://formspree.io/f/xvgznoob" method="POST">
+              <ContactField label="Full Name" name="name" placeholder="John Doe" />
+              <ContactField label="Email Address" name="email" type="email" placeholder="john@example.com" />
+              <ContactField label="Your Message" name="message" type="textarea" placeholder="How can I help you?" />
               
-              <button 
-                onMouseEnter={() => setBtnHover(prev => prev + 1)}
-                disabled={submitting}
-                className="btn-primary w-full py-5 mt-4 flex items-center justify-center gap-3 disabled:opacity-50"
-              >
-                <ButtonText text={submitting ? "SENDING..." : "SEND MESSAGE"} trigger={btnHover} />
-                <Send size={18} />
+              <button type="submit" className="btn-primary w-full mt-10 group">
+                <Send size={18} className="mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                SEND SECURELY
               </button>
             </form>
           </motion.div>
+
         </div>
       </div>
     </section>
