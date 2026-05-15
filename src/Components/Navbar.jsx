@@ -28,34 +28,47 @@ const Navbar = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut",
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
     scrollHidden: {
       y: "-100%",
       opacity: 0,
-      transition: { duration: 0.2, ease: "easeInOut" },
+      transition: { duration: 0.2, ease: "easeOut" }, // faster hide
     },
   };
 
-  // ✅ FIXED SCROLL (instant response)
+  const itemVariants = {
+    hidden: { y: -20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
 
-      // 🔥 INSTANT show/hide (no delay feeling)
-      const scrollingDown = currentY > lastScrollY.current;
+      // ✅ INSTANT SHOW/HIDE FIX (no delay feeling)
+      const goingDown = currentY > lastScrollY.current;
+      const goingUp = currentY < lastScrollY.current;
 
-      if (scrollingDown && currentY > 80) {
+      if (goingDown && currentY > 100) {
         setHiddenNav(true);
-      } else {
-        setHiddenNav(false); // instantly show on scroll UP
+      }
+
+      if (goingUp) {
+        setHiddenNav(false); // 🔥 instantly show on scroll up
+      }
+
+      if (currentY <= 50) {
+        setHiddenNav(false);
       }
 
       setScrolled(currentY > 20);
 
-      // active section
+      // Active section tracking (unchanged logic)
       const sections = [
         "hero",
         "about",
@@ -97,10 +110,10 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial="visible"
+      initial="hidden"
       animate={hiddenNav ? "scrollHidden" : "visible"}
       variants={navVariants}
-      className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
         scrolled
           ? "py-4 bg-[rgba(5,10,20,0.92)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.08)]"
           : "py-6 bg-transparent"
@@ -108,47 +121,61 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-black text-white">
-          MOKIM<span className="text-[#00F5FF]">.</span>
-        </Link>
+        <motion.div variants={itemVariants}>
+          <Link
+            to="/"
+            className="text-2xl font-black tracking-tighter text-white"
+          >
+            MOKIM<span className="text-[#00F5FF]">.</span>
+          </Link>
+        </motion.div>
 
         {/* Desktop Nav */}
-        <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.slice(1);
+        <div className="hidden lg:flex items-center gap-10">
+          <ul className="flex items-center gap-8">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
 
-            return (
-              <li key={link.name} className="relative">
-                <a
-                  href={link.href}
-                  className={`text-[11px] font-bold uppercase tracking-[0.25em] transition-colors ${
-                    isActive ? "text-[#00F5FF]" : "text-white/60 hover:text-white"
-                  }`}
-                >
-                  {link.name}
-                </a>
+              return (
+                <motion.li key={link.name} variants={itemVariants}>
+                  <a
+                    href={link.href}
+                    className={`relative text-[11px] font-bold uppercase tracking-[0.25em] py-2 transition-colors ${
+                      isActive
+                        ? "text-[#00F5FF]"
+                        : "text-white/60 hover:text-white"
+                    }`}
+                  >
+                    {link.name}
 
-                {/* ✅ UNDERLINE FIX */}
-                <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-[#00F5FF] transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0"
-                  }`}
-                />
-              </li>
-            );
-          })}
-        </ul>
+                    {/* 🔥 ACTIVE UNDERLINE FIX */}
+                    <span
+                      className={`absolute left-0 -bottom-1 h-[2px] bg-[#00F5FF] transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </a>
+                </motion.li>
+              );
+            })}
+          </ul>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden lg:block px-6 py-3 rounded-xl border border-[#00F5FF]/30 text-white hover:bg-[#00F5FF] hover:text-black transition-all"
-        >
-          HIRE ME
-        </a>
+          {/* CTA */}
+          <motion.div variants={itemVariants}>
+            <a
+              href="#contact"
+              className="px-6 py-3 rounded-xl border border-[#00F5FF]/30 text-white hover:text-black hover:bg-[#00F5FF] transition-all duration-300"
+            >
+              HIRE ME
+            </a>
+          </motion.div>
+        </div>
 
         {/* Mobile */}
-        <button className="lg:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          className="lg:hidden text-white"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -160,7 +187,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden bg-[#050A14] p-6"
+            className="lg:hidden bg-[#050A14] border-t border-white/10 p-6"
           >
             {navLinks.map((link) => (
               <a
