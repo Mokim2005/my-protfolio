@@ -111,7 +111,7 @@ const Skills = () => {
             Capabilities
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight text-white">
-            Technical <span className="gradient-text">Arsenal</span>
+            <span className="gradient-text">Technical Arsenal</span>
           </h2>
           <p className="text-[rgba(240,244,255,0.75)] text-lg md:text-xl leading-relaxed">
             A comprehensive set of modern technologies I use to bring complex
