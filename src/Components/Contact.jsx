@@ -164,7 +164,6 @@ const Contact = () => {
                 </motion.a>
               ))}
             </div>
-
             <div className="flex gap-4 mt-10">
               {socialLinks.map((social, i) => (
                 <motion.a
@@ -172,7 +171,21 @@ const Contact = () => {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-14 h-14 rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center"
+                  whileHover={{ y: -4, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-14 h-14 rounded-2xl 
+                 bg-white/5 
+                 border border-white/10 
+                 backdrop-blur-xl
+                 flex items-center justify-center
+                 text-white/70
+                 hover:text-[#00F5FF]
+                 hover:border-[#00F5FF]/40
+                 hover:bg-white/10
+                 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]
+                 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]
+                 transition-all duration-300"
                 >
                   {social.icon}
                 </motion.a>
@@ -215,32 +228,34 @@ const Contact = () => {
                   placeholder="How can I help you?"
                 />
 
-   <button
-  type="submit"
-  className="w-full h-14 sm:h-16 rounded-2xl bg-[#00F5FF] text-black font-black text-sm sm:text-base tracking-[0.2em] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group relative overflow-hidden"
->
-  <span className="relative inline-flex items-center gap-3 overflow-hidden">
+                <button
+                  type="submit"
+                  className="w-full h-14 sm:h-16 rounded-2xl bg-[#00F5FF] text-black font-black text-sm sm:text-base tracking-[0.2em] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group relative overflow-hidden"
+                >
+                  <span className="relative inline-flex items-center gap-3 overflow-hidden">
+                    {/* TOP TEXT (slide up on hover) */}
+                    <span
+                      className="inline-flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-full"
+                      style={{
+                        transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                      }}
+                    >
+                      <Send size={18} />
+                      SEND SECURELY
+                    </span>
 
-    {/* TOP TEXT (slide up on hover) */}
-    <span
-      className="inline-flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-full"
-      style={{ transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)" }}
-    >
-      <Send size={18} />
-      SEND SECURELY
-    </span>
-
-    {/* BOTTOM TEXT (slide in on hover) */}
-    <span
-      className="absolute inset-0 flex items-center justify-center gap-3 translate-y-full transition-transform duration-500 group-hover:translate-y-0"
-      style={{ transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)" }}
-    >
-      <Send size={18} />
-      SEND SECURELY
-    </span>
-
-  </span>
-</button>
+                    {/* BOTTOM TEXT (slide in on hover) */}
+                    <span
+                      className="absolute inset-0 flex items-center justify-center gap-3 translate-y-full transition-transform duration-500 group-hover:translate-y-0"
+                      style={{
+                        transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                      }}
+                    >
+                      <Send size={18} />
+                      SEND SECURELY
+                    </span>
+                  </span>
+                </button>
               </form>
             </div>
           </motion.div>
