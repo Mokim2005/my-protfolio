@@ -1,23 +1,36 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaCode, FaGithub 
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FaReact,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaGitAlt,
+  FaCode,
+  FaGithub,
 } from "react-icons/fa";
-import { 
-  SiExpress, SiTailwindcss, SiJavascript, SiMongodb, SiPostman, SiFigma, SiFirebase, SiNextdotjs 
+import {
+  SiExpress,
+  SiTailwindcss,
+  SiJavascript,
+  SiMongodb,
+  SiPostman,
+  SiFigma,
+  SiFirebase,
+  SiNextdotjs,
 } from "react-icons/si";
 
 const SkillBadge = ({ name, icon, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.05, duration: 0.5 }}
+    transition={{ delay: index * 0.05, duration: 0.2 }}
     viewport={{ once: true }}
-    whileHover={{ 
-      scale: 1.05, 
-      backgroundColor: "rgba(0,245,255,0.08)", 
+    whileHover={{
+      scale: 1.05,
+      backgroundColor: "rgba(0,245,255,0.08)",
       borderColor: "rgba(0,245,255,0.3)",
-      boxShadow: "0 0 25px rgba(0,245,255,0.15)"
+      boxShadow: "0 0 25px rgba(0,245,255,0.15)",
     }}
     className="group flex flex-col items-center gap-4 p-8 rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] transition-all duration-300"
   >
@@ -33,7 +46,9 @@ const SkillBadge = ({ name, icon, index }) => (
 const SkillCategory = ({ title, skills }) => (
   <div className="mb-20 last:mb-0">
     <div className="flex items-center gap-6 mb-12">
-      <h3 className="text-[#00F5FF] text-xs uppercase tracking-[0.4em] font-black whitespace-nowrap">{title}</h3>
+      <h3 className="text-[#00F5FF] text-xs uppercase tracking-[0.4em] font-black whitespace-nowrap">
+        {title}
+      </h3>
       <div className="flex-grow h-px bg-gradient-to-r from-[rgba(123,47,190,0.2)] to-transparent" />
     </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
@@ -55,7 +70,7 @@ const Skills = () => {
         { name: "Tailwind", icon: <SiTailwindcss /> },
         { name: "HTML5", icon: <FaHtml5 /> },
         { name: "CSS3", icon: <FaCss3Alt /> },
-      ]
+      ],
     },
     {
       title: "Backend & Database",
@@ -64,7 +79,7 @@ const Skills = () => {
         { name: "Express.js", icon: <SiExpress /> },
         { name: "MongoDB", icon: <SiMongodb /> },
         { name: "Firebase", icon: <SiFirebase /> },
-      ]
+      ],
     },
     {
       title: "Tools & Design",
@@ -74,12 +89,15 @@ const Skills = () => {
         { name: "Postman", icon: <SiPostman /> },
         { name: "Figma", icon: <SiFigma /> },
         { name: "VS Code", icon: <FaCode /> },
-      ]
-    }
+      ],
+    },
   ];
 
   return (
-    <section id="skills" className="py-24 md:py-32 relative overflow-hidden section-bg">
+    <section
+      id="skills"
+      className="py-24 md:py-32 relative overflow-hidden section-bg"
+    >
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-[rgba(0,245,255,0.03)] blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container">
@@ -95,7 +113,9 @@ const Skills = () => {
             Technical <span className="gradient-text">Arsenal</span>
           </h2>
           <p className="text-[rgba(240,244,255,0.75)] text-lg md:text-xl leading-relaxed">
-            A comprehensive set of modern technologies I use to bring complex digital visions to life, from pixel-perfect frontends to robust backends.
+            A comprehensive set of modern technologies I use to bring complex
+            digital visions to life, from pixel-perfect frontends to robust
+            backends.
           </p>
         </div>
 
