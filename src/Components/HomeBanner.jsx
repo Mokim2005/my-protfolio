@@ -9,11 +9,11 @@ const HomeBanner = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  const imageRef = useRef(null);
   const glowRef = useRef(null);
   const containerRef = useRef(null);
+  const cardRef = useRef(null);
 
   const greetings = ["Hello!", "Hi There!", "Welcome!", "Hey!"];
   const roles = ["Full Stack Developer", "MERN Stack Expert", "UI/UX Enthusiast", "Problem Solver"];
@@ -22,181 +22,133 @@ const HomeBanner = () => {
   useEffect(() => {
     const name = "Mokim";
     let timeout;
-    
     if (!isDeleting && displayedText.length < name.length) {
-      timeout = setTimeout(() => {
-        setDisplayedText(name.slice(0, displayedText.length + 1));
-      }, 150);
+      timeout = setTimeout(() => setDisplayedText(name.slice(0, displayedText.length + 1)), 150);
     } else if (!isDeleting && displayedText.length === name.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2000);
     } else if (isDeleting && displayedText.length > 0) {
-      timeout = setTimeout(() => {
-        setDisplayedText(displayedText.slice(0, -1));
-      }, 100);
+      timeout = setTimeout(() => setDisplayedText(displayedText.slice(0, -1)), 100);
     } else if (isDeleting && displayedText.length === 0) {
       setIsDeleting(false);
     }
-
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting]);
 
   // Rotate greetings
   useEffect(() => {
-    const interval = setInterval(() => {
-      setGreetingIndex((prev) => (prev + 1) % greetings.length);
-    }, 3000);
+    const interval = setInterval(() => setGreetingIndex((prev) => (prev + 1) % greetings.length), 3000);
     return () => clearInterval(interval);
   }, []);
 
   // Rotate roles
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 4000);
+    const interval = setInterval(() => setRoleIndex((prev) => (prev + 1) % roles.length), 4000);
     return () => clearInterval(interval);
   }, []);
 
-  // GSAP floating animation for image
+  // Glow pulse animation only (no image float — keeps image straight)
   useEffect(() => {
-    const image = imageRef.current;
     const glow = glowRef.current;
-    if (!image || !glow) return;
-
+    if (!glow) return;
     let animationFrame;
     let startTime = Date.now();
-
     const animate = () => {
       const elapsed = (Date.now() - startTime) / 1000;
-      const y = Math.sin(elapsed * 0.8) * 15;
-      const rotate = Math.sin(elapsed * 0.5) * 2;
-      const scale = 1 + Math.sin(elapsed * 1.2) * 0.02;
-
-      image.style.transform = `translateY(${y}px) rotate(${rotate}deg) scale(${scale})`;
-      
-      // Glow animation
-      const glowScale = 1 + Math.sin(elapsed * 0.6) * 0.1;
-      const glowOpacity = 0.6 + Math.sin(elapsed * 0.8) * 0.2;
+      const glowScale = 1 + Math.sin(elapsed * 0.6) * 0.08;
+      const glowOpacity = 0.55 + Math.sin(elapsed * 0.8) * 0.15;
       glow.style.transform = `scale(${glowScale})`;
       glow.style.opacity = glowOpacity;
-
       animationFrame = requestAnimationFrame(animate);
     };
-
     animate();
-
-    return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
-    };
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
-  // Mouse parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      setMousePosition({ x: x * 20, y: y * 20 });
-    };
+  // Card tilt on mouse move (subtle 3D tilt — not full parallax)
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -10, y: x * 10 }); // max ±5deg
+  };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-      },
-    },
+    visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.12, delayChildren: 0.2 } },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8, x: 50 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        delay: 0.4,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
+    hidden: { opacity: 0, scale: 0.85, x: 40 },
+    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] } },
   };
 
-  const socialIcons = [
-    { icon: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z", link: "https://github.com/Mokim2005" },
-    { icon: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z", link: "https://www.linkedin.com/in/abdul-mokim-810380352" },
-    { icon: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.222 17.75h1.92L5.493 5.25H3.446l13.576 14.75z", link: "https://x.com/AbdulMokim40428" },
+  const socialLinks = [
+    {
+      label: "GitHub",
+      href: "https://github.com/Mokim2005",
+      color: "#ffffff",
+      path: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/abdul-mokim-810380352",
+      color: "#0A66C2",
+      path: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z",
+    },
+    {
+      label: "Twitter / X",
+      href: "https://x.com/AbdulMokim40428",
+      color: "#1DA1F2",
+      path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.222 17.75h1.92L5.493 5.25H3.446l13.576 14.75z",
+    },
   ];
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4 md:px-6 lg:px-8">
-      {/* Animated Background */}
+    <section
+      ref={containerRef}
+      /* pt-24 → navbar height offset; reduced from py-20 to pt-20 pb-16 */
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16 px-4 md:px-6 lg:px-8"
+    >
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-purple-950/20 to-gray-950" />
 
-      {/* Floating Background Elements */}
+      {/* Floating blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -40, 0],
-            scale: [1, 1.1, 1],
-          }}
+          animate={{ x: [0, 30, 0], y: [0, -40, 0], scale: [1, 1.1, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute top-[20%] left-[10%] w-[300px] h-[300px] rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
+          style={{ background: "radial-gradient(circle, rgba(168,85,247,0.6) 0%, transparent 70%)", filter: "blur(60px)" }}
         />
         <motion.div
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.15, 1],
-          }}
+          animate={{ x: [0, -40, 0], y: [0, 30, 0], scale: [1, 1.15, 1] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] rounded-full opacity-15"
-          style={{
-            background: "radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%)",
-            filter: "blur(70px)",
-          }}
+          style={{ background: "radial-gradient(circle, rgba(236,72,153,0.6) 0%, transparent 70%)", filter: "blur(70px)" }}
         />
       </div>
 
-      {/* Main Content - Split Layout */}
+      {/* Content */}
       <div className="max-w-7xl w-full mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* LEFT COLUMN - Text Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+          {/* ── LEFT: Text ── */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="order-2 lg:order-1 text-center lg:text-left"
           >
-            {/* Status Badge */}
-            <motion.div variants={itemVariants} className="flex justify-center lg:justify-start mb-6">
+            {/* Status badge */}
+            <motion.div variants={itemVariants} className="flex justify-center lg:justify-start mb-5">
               <div className="inline-flex items-center gap-2 glass-badge px-5 py-2.5 rounded-full">
                 <motion.span
                   animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
@@ -209,8 +161,8 @@ const HomeBanner = () => {
               </div>
             </motion.div>
 
-            {/* Animated Greeting */}
-            <motion.div variants={itemVariants} className="mb-4">
+            {/* Greeting */}
+            <motion.div variants={itemVariants} className="mb-3">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={greetingIndex}
@@ -227,10 +179,10 @@ const HomeBanner = () => {
               </AnimatePresence>
             </motion.div>
 
-            {/* Main Heading with Typewriter */}
+            {/* Heading + typewriter */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 tracking-tight"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-5 tracking-tight"
             >
               <span className="text-white">Hi, I'm </span>
               <span className="gradient-text inline-block">
@@ -243,8 +195,8 @@ const HomeBanner = () => {
               </span>
             </motion.h1>
 
-            {/* Dynamic Role Changer */}
-            <motion.div variants={itemVariants} className="h-14 md:h-16 mb-6 flex items-center justify-center lg:justify-start">
+            {/* Role changer */}
+            <motion.div variants={itemVariants} className="h-12 md:h-14 mb-5 flex items-center justify-center lg:justify-start">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={roleIndex}
@@ -254,9 +206,7 @@ const HomeBanner = () => {
                   transition={{ duration: 0.5 }}
                   className="text-xl md:text-2xl lg:text-3xl font-bold"
                 >
-                  <span className="gradient-text-secondary">
-                    {roles[roleIndex]}
-                  </span>
+                  <span className="gradient-text-secondary">{roles[roleIndex]}</span>
                 </motion.p>
               </AnimatePresence>
             </motion.div>
@@ -264,7 +214,7 @@ const HomeBanner = () => {
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-300 text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed"
+              className="text-gray-300 text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-7 leading-relaxed"
             >
               Building high-performance{" "}
               <span className="text-white font-semibold">Full Stack Applications</span>{" "}
@@ -274,13 +224,9 @@ const HomeBanner = () => {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-7"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }}>
                 <NavLink
                   to="/my-project"
                   className="hero-button-primary px-8 py-4 rounded-xl font-bold text-white text-center block"
@@ -301,11 +247,7 @@ const HomeBanner = () => {
                 </NavLink>
               </motion.div>
 
-              <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }}>
                 <a
                   href="https://docs.google.com/document/d/1PMXf1jmYjMe_i7s6sIcHoSKJ52TPp6saFqrVioPseac/edit?tab=t.0"
                   target="_blank"
@@ -317,31 +259,56 @@ const HomeBanner = () => {
               </motion.div>
             </motion.div>
 
-            {/* Social Icons */}
-            <motion.div
-              variants={itemVariants}
-              className="flex justify-center lg:justify-start gap-4"
-            >
-              {socialIcons.map((social, index) => (
+            {/* Social Icons — with branded hover colors */}
+            <motion.div variants={itemVariants} className="flex justify-center lg:justify-start gap-3">
+              {socialLinks.map((social) => (
                 <motion.a
-                  key={index}
-                  href={social.link}
+                  key={social.label}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ y: -8, scale: 1.15 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="social-icon-glass p-3 rounded-xl"
+                  aria-label={social.label}
+                  whileHover={{ y: -6, scale: 1.18 }}
+                  whileTap={{ scale: 0.88 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="group relative p-3 rounded-xl transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = `${social.color}18`;
+                    e.currentTarget.style.borderColor = `${social.color}55`;
+                    e.currentTarget.style.boxShadow = `0 8px 24px ${social.color}33`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                 >
-                  <svg className="w-6 h-6 text-gray-300 hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={social.icon} />
+                  <svg
+                    className="w-5 h-5 transition-colors duration-300"
+                    style={{ color: "rgba(209,213,219,0.8)" }}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    onMouseEnter={(e) => { e.currentTarget.style.color = social.color; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(209,213,219,0.8)"; }}
+                  >
+                    <path d={social.path} />
                   </svg>
+
+                  {/* Tooltip */}
+                  <span className="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-[10px] font-bold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+                    style={{ background: "rgba(0,0,0,0.7)" }}>
+                    {social.label}
+                  </span>
                 </motion.a>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* RIGHT COLUMN - Profile Image */}
+          {/* ── RIGHT: Image with tilt on hover ── */}
           <motion.div
             variants={imageVariants}
             initial="hidden"
@@ -349,55 +316,54 @@ const HomeBanner = () => {
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Animated Glow */}
+              {/* Glow */}
               <div
                 ref={glowRef}
-                className="absolute -inset-8 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 rounded-full opacity-60 blur-3xl"
-                style={{ willChange: 'transform, opacity' }}
+                className="absolute -inset-8 rounded-full blur-3xl"
+                style={{
+                  background: "linear-gradient(135deg, rgba(168,85,247,0.5), rgba(236,72,153,0.5), rgba(6,182,212,0.4))",
+                  willChange: "transform, opacity",
+                }}
               />
 
-              {/* Glass Container */}
+              {/* Card — tilt on hover */}
               <motion.div
-                className="relative profile-glass-container"
-                style={{
-                  x: mousePosition.x,
-                  y: mousePosition.y,
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                animate={{
+                  rotateX: tilt.x,
+                  rotateY: tilt.y,
                 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                style={{ transformStyle: "preserve-3d", willChange: "transform" }}
+                className="relative profile-glass-container cursor-pointer"
               >
-                <div
-                  ref={imageRef}
-                  className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden"
-                  style={{ willChange: 'transform' }}
-                >
+                {/* Image — straight, no float */}
+                <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden">
                   <img
                     src={img}
                     alt="M.A. Mokim"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
+                    draggable={false}
                   />
-                  
-                  {/* Shine Overlay */}
+
+                  {/* Shine sweep */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
-                    animate={{
-                      x: ["-100%", "200%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 2,
-                      ease: "easeInOut",
-                    }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, repeatDelay: 2.5, ease: "easeInOut" }}
                   />
                 </div>
               </motion.div>
             </div>
           </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 w-full h-28 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
     </section>
   );
 };

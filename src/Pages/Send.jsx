@@ -21,7 +21,7 @@ const ContactSection = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("https://formspree.io/f/mojaoopp", {
+      const response = await fetch("https://formspree.io/f/xdabrywd", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
