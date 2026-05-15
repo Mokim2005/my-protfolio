@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
@@ -12,6 +12,9 @@ const Navbar = () => {
   const [hiddenNav, setHiddenNav] = useState(false);
 
   const lastScrollY = useRef(0);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "Home", href: "#hero" },
@@ -37,7 +40,7 @@ const Navbar = () => {
     scrollHidden: {
       y: "-100%",
       opacity: 0,
-      transition: { duration: 0.2, ease: "easeOut" }, // faster hide
+      transition: { duration: 0.2, ease: "easeOut" },
     },
   };
 
@@ -46,29 +49,35 @@ const Navbar = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
   };
 
+  // ✅ FIX: safe scroll navigation
+  const handleNav = (href) => {
+    if (!href.startsWith("#")) return;
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      }, 150);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
 
-      // ✅ INSTANT SHOW/HIDE FIX (no delay feeling)
       const goingDown = currentY > lastScrollY.current;
       const goingUp = currentY < lastScrollY.current;
 
-      if (goingDown && currentY > 100) {
-        setHiddenNav(true);
-      }
-
-      if (goingUp) {
-        setHiddenNav(false); // 🔥 instantly show on scroll up
-      }
-
-      if (currentY <= 50) {
-        setHiddenNav(false);
-      }
+      if (goingDown && currentY > 100) setHiddenNav(true);
+      if (goingUp) setHiddenNav(false);
+      if (currentY <= 50) setHiddenNav(false);
 
       setScrolled(currentY > 20);
 
-      // Active section tracking (unchanged logic)
       const sections = [
         "hero",
         "about",
@@ -120,16 +129,31 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
-        {/* Logo */}
         <motion.div variants={itemVariants}>
           <Link
             to="/"
-            className="text-2xl font-black tracking-tighter text-white"
+            className="group relative text-2xl font-black tracking-tighter inline-block"
           >
-            MOKIM<span className="text-[#00F5FF]">.</span>
+            {/* Gradient Text */}
+            <span
+              className="bg-gradient-to-r from-white via-[#00F5FF] to-[#7B2FFE] 
+                 bg-clip-text text-transparent
+                 transition-all duration-500"
+            >
+              M.A. MOKIM<span className="text-[#00F5FF]">.</span>
+            </span>
+
+            {/* Glow Effect */}
+            <span
+              className="absolute inset-0 -z-10 opacity-30 blur-2xl 
+                 bg-gradient-to-r from-[#00F5FF]/20 via-[#7B2FFE]/20 to-transparent 
+                 rounded-lg scale-110"
+            />
+
+            {/* Hover underline */}
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#00F5FF] group-hover:w-full transition-all duration-300" />
           </Link>
         </motion.div>
-
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
           <ul className="flex items-center gap-8">
@@ -140,7 +164,11 @@ const Navbar = () => {
                 <motion.li key={link.name} variants={itemVariants}>
                   <a
                     href={link.href}
-                    className={`relative text-[11px] font-bold uppercase tracking-[0.25em] py-2 transition-colors ${
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNav(link.href);
+                    }}
+                    className={`group relative text-[11px] font-bold uppercase tracking-[0.25em] py-2 transition-colors ${
                       isActive
                         ? "text-[#00F5FF]"
                         : "text-white/60 hover:text-white"
@@ -148,7 +176,6 @@ const Navbar = () => {
                   >
                     {link.name}
 
-                    {/* 🔥 ACTIVE UNDERLINE FIX */}
                     <span
                       className={`absolute left-0 -bottom-1 h-[2px] bg-[#00F5FF] transition-all duration-300 ${
                         isActive ? "w-full" : "w-0 group-hover:w-full"
@@ -161,34 +188,20 @@ const Navbar = () => {
           </ul>
 
           {/* CTA */}
-          {/* CTA */}
           <motion.div variants={itemVariants}>
             <motion.a
               href="#contact"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav("#contact");
+              }}
               className="px-6 py-3 rounded-xl border border-[#00F5FF]/30 text-white hover:text-black hover:bg-[#00F5FF] transition-all duration-300 group relative overflow-hidden inline-flex items-center justify-center"
             >
               <span className="relative overflow-hidden">
-                {/* top text */}
-                <span
-                  className="block transition-transform duration-500 group-hover:-translate-y-full"
-                  style={{
-                    transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
-                  }}
-                >
+                <span className="block transition-transform duration-500 group-hover:-translate-y-full">
                   HIRE ME
                 </span>
-
-                {/* bottom text */}
-                <span
-                  className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0"
-                  style={{
-                    transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
-                  }}
-                >
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0">
                   HIRE ME
                 </span>
               </span>
@@ -218,7 +231,10 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav(link.href);
+                }}
                 className="block py-3 text-white border-b border-white/10"
               >
                 {link.name}
