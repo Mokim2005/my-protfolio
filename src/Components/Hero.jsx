@@ -1,7 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { gsap } from 'gsap';
-import { ChevronDown, Github, Linkedin, Twitter, ArrowRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+import {
+  ChevronDown,
+  Github,
+  Linkedin,
+  Twitter,
+  ArrowRight,
+} from "lucide-react";
 import profileImg from "../assets/my-img.JPG";
 
 // Component for staggered text reveal
@@ -10,14 +16,17 @@ const SplitText = ({ text, delay = 0, className = "" }) => {
   return (
     <span className={className}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]">
+        <span
+          key={i}
+          className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]"
+        >
           <motion.span
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             transition={{
               duration: 0.8,
               delay: delay + i * 0.1,
-              ease: [0.22, 1, 0.36, 1]
+              ease: [0.22, 1, 0.36, 1],
             }}
             className="inline-block"
           >
@@ -33,7 +42,12 @@ const Hero = () => {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const [roleIndex, setRoleIndex] = useState(0);
-  const roles = ["Full Stack Developer", "MERN Stack Expert", "UI/UX Enthusiast", "Problem Solver"];
+  const roles = [
+    "Full Stack Developer",
+    "MERN Stack Expert",
+    "UI/UX Enthusiast",
+    "Problem Solver",
+  ];
 
   useEffect(() => {
     const roleInterval = setInterval(() => {
@@ -43,8 +57,9 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       const particles = 40;
       for (let i = 0; i < particles; i++) {
-        const p = document.createElement('div');
-        p.className = 'absolute rounded-full bg-[#00F5FF] pointer-events-none opacity-0';
+        const p = document.createElement("div");
+        p.className =
+          "absolute rounded-full bg-[#00F5FF] pointer-events-none opacity-0";
         const size = Math.random() * 3 + 2;
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
@@ -58,7 +73,7 @@ const Hero = () => {
         gsap.to(p, {
           opacity: Math.random() * 0.2 + 0.1,
           duration: 2,
-          delay: Math.random() * 2
+          delay: Math.random() * 2,
         });
 
         gsap.to(p, {
@@ -80,17 +95,21 @@ const Hero = () => {
 
   const socialLinks = [
     { icon: <Github size={20} />, href: "https://github.com/Mokim2005" },
-    { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/abdul-mokim-810380352" },
+    {
+      icon: <Linkedin size={20} />,
+      href: "https://www.linkedin.com/in/abdul-mokim-810380352",
+    },
     { icon: <Twitter size={20} />, href: "https://x.com/AbdulMokim40428" },
   ];
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       ref={containerRef}
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-24 pb-20 md:pt-32"
       style={{
-        background: 'radial-gradient(circle at 50% 50%, rgba(0,245,255,0.05) 0%, #050A14 100%)'
+        background:
+          "radial-gradient(circle at 50% 50%, rgba(0,245,255,0.05) 0%, #050A14 100%)",
       }}
     >
       {/* Dynamic Background Grid */}
@@ -99,7 +118,6 @@ const Hero = () => {
 
       <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
-          
           {/* Left: Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             <motion.div
@@ -117,7 +135,7 @@ const Hero = () => {
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black mb-8 leading-[1.05] tracking-tight text-white">
               <SplitText text="Hi, I'm" delay={0.4} /> <br />
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}
@@ -143,28 +161,34 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.2 }}
               className="text-[rgba(240,244,255,0.55)] text-lg md:text-xl mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
             >
-              Building high-performance Full Stack Applications with the modern MERN ecosystem, focusing on clean code and exceptional user experiences.
+              Building high-performance Full Stack Applications with the modern
+              MERN ecosystem, focusing on clean code and exceptional user
+              experiences.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
               className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center mb-12"
             >
               <a href="#projects" className="btn-primary min-w-[220px] group">
-                VIEW PROJECTS <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                VIEW PROJECTS{" "}
+                <ArrowRight
+                  size={18}
+                  className="ml-2 group-hover:translate-x-1 transition-transform"
+                />
               </a>
 
-              <a 
-                href="https://docs.google.com/document/d/1PMXf1jmYjMe_i7s6sIcHoSKJ52TPp6saFqrVioPseac/edit?tab=t.0" 
-                target="_blank" 
+              <a
+                href="https://drive.google.com/file/d/10-Ygyjmht2I9pCCvmAqF00taZn93-9w8/view?usp=sharing"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline min-w-[220px]"
               >
@@ -183,7 +207,12 @@ const Hero = () => {
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 1.6 + i * 0.1 }}
-                  whileHover={{ y: -5, backgroundColor: "rgba(0,245,255,0.1)", borderColor: "rgba(0,245,255,0.4)", color: "#00F5FF" }}
+                  whileHover={{
+                    y: -5,
+                    backgroundColor: "rgba(0,245,255,0.1)",
+                    borderColor: "rgba(0,245,255,0.4)",
+                    color: "#00F5FF",
+                  }}
                   className="w-12 h-12 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[rgba(240,244,255,0.6)] transition-all"
                 >
                   {link.icon}
@@ -193,7 +222,7 @@ const Hero = () => {
           </div>
 
           {/* Right: Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -201,39 +230,46 @@ const Hero = () => {
           >
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[450px] md:h-[450px]">
               {/* Complex Animated Backgrounds */}
-              <motion.div 
+              <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-4 border border-dashed border-[rgba(0,245,255,0.2)] rounded-full" 
+                className="absolute -inset-4 border border-dashed border-[rgba(0,245,255,0.2)] rounded-full"
               />
               <div className="absolute -inset-10 bg-gradient-to-tr from-[#00F5FF] via-[#7B2FBE] to-transparent opacity-10 blur-[100px] rounded-full animate-pulse" />
-              
+
               <div className="relative w-full h-full glass-card p-4 md:p-6 rotate-3 hover:rotate-0 transition-transform duration-700">
                 <div className="relative w-full h-full overflow-hidden rounded-2xl">
-                  <motion.img 
+                  <motion.img
                     initial={{ scale: 1.2, filter: "blur(10px)" }}
                     animate={{ scale: 1, filter: "blur(0px)" }}
                     transition={{ duration: 1.5, delay: 0.6 }}
-                    src={profileImg} 
-                    alt="Abdul Mokim" 
+                    src={profileImg}
+                    alt="Abdul Mokim"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050A14] via-transparent to-transparent opacity-40" />
                 </div>
               </div>
-              
+
               {/* Floating Badge */}
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-10 glass-card px-4 py-3 md:px-6 md:py-4 border-[rgba(0,245,255,0.3)] bg-[rgba(5,10,20,0.8)] z-20"
               >
-                <div className="text-[#00F5FF] font-black text-xl md:text-2xl">1+</div>
-                <div className="text-[rgba(240,244,255,0.5)] text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Years Experience</div>
+                <div className="text-[#00F5FF] font-black text-xl md:text-2xl">
+                  1+
+                </div>
+                <div className="text-[rgba(240,244,255,0.5)] text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
+                  Years Experience
+                </div>
               </motion.div>
             </div>
           </motion.div>
-
         </div>
       </div>
 
@@ -243,9 +279,15 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-        onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+        onClick={() =>
+          document
+            .getElementById("about")
+            .scrollIntoView({ behavior: "smooth" })
+        }
       >
-        <span className="text-[10px] font-black text-[rgba(240,244,255,0.3)] uppercase tracking-[0.3em]">Scroll</span>
+        <span className="text-[10px] font-black text-[rgba(240,244,255,0.3)] uppercase tracking-[0.3em]">
+          Scroll
+        </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
