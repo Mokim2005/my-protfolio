@@ -89,7 +89,7 @@ const ServiceCard = ({ service, index }) => (
 
 const ServiceSection = () => {
   return (
-    <section id="services" className="py-32 bg-[#050505] relative overflow-hidden">
+    <section id="services" className="py-24 md:py-32 relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl"> {/* max-w-7xl total layout-ke boro kore */}
         
         {/* Header Section */}

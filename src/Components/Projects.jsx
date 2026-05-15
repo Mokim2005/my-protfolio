@@ -115,7 +115,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects">
+    <section id="projects" className="py-24 md:py-32">
       <div className="container">
         <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
           <div className="max-w-3xl text-center lg:text-left">

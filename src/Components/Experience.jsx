@@ -1,77 +1,91 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Briefcase, GraduationCap, MapPin } from 'lucide-react';
-
-/**
- * 🎓 EXPERIENCE SECTION OPTIMIZATION REPORT
- * 
- * Spacing Issues Fixed:
- * - Unified card padding to p-10 for premium breathing room.
- * - Standardized gap-12 between timeline line and content.
- * - Consistent mb-16 (mobile) to mb-32 (desktop) vertical rhythm.
- * 
- * Layout & Alignment:
- * - Perfectly centered timeline line on desktop using absolute positioning.
- * - Symmetrical alternating layout with justified text for balance.
- * - Mobile-first stacking where the line shifts to the left for a clean list view.
- * 
- * Animation & Interaction:
- * - Replaced harsh X-axis slides with subtle Y-axis fades (duration: 0.5s).
- * - Smooth soft-lift effect on hover (translateY: -4px).
- * - Optimized viewport triggers to 'once: true' for performance.
- */
+import React from "react";
+import { motion } from "framer-motion";
+import { Calendar, Briefcase, GraduationCap, MapPin } from "lucide-react";
 
 const ExperienceItem = ({ item, index }) => {
   const isEven = index % 2 === 0;
 
   return (
-    <div className={`relative flex flex-col md:flex-row w-full mb-16 md:mb-32 last:mb-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-      {/* Timeline Dot (Desktop only center-aligned) */}
-      <div className="absolute left-0 md:left-1/2 top-0 md:top-12 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[#00F5FF] shadow-[0_0_20px_#00F5FF] z-20 hidden md:block">
-        <div className="absolute inset-0 rounded-full bg-[#00F5FF] animate-ping opacity-20" />
+    <div className="relative flex items-center justify-between w-full mb-12 md:mb-24 last:mb-0">
+      {/* Timeline Dot */}
+      <div className="absolute left-[17px] md:left-1/2 top-0 md:top-10 -translate-x-1/2 z-20">
+        <div className="relative flex items-center justify-center">
+          {/* Main Dot */}
+          <div className="w-5 h-5 rounded-full bg-cyan-400 border-4 border-[#0a0a0a] shadow-[0_0_15px_rgba(34,211,238,0.5)] z-10" />
+          {/* Pulsing Outer Ring */}
+          <div className="absolute w-8 h-8 rounded-full bg-cyan-400/20 animate-ping" />
+          {/* Subtle Glow */}
+          <div className="absolute w-12 h-12 rounded-full bg-cyan-400/10 blur-xl" />
+        </div>
       </div>
 
-      {/* Content Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-50px" }}
-        className={`w-full md:w-[45%] glass-card p-8 md:p-10 group hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:border-[#00F5FF]/20 transition-all duration-500 ${isEven ? 'md:text-right' : 'md:text-left'}`}
-      >
-        {/* Header Area */}
-        <div className={`flex items-center gap-4 mb-6 ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-          <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[rgba(0,245,255,0.05)] border border-[rgba(0,245,255,0.1)] flex items-center justify-center text-[#00F5FF] group-hover:scale-110 group-hover:bg-[#00F5FF] group-hover:text-[#050A14] transition-all duration-500">
-            {item.type === 'education' ? <GraduationCap size={22} /> : <Briefcase size={22} />}
+      {/* Card Container — FIX 1: pl-10 → pl-14 mobile padding increased */}
+      <div className={`w-full flex ${isEven ? "md:justify-start" : "md:justify-end"} pl-14 md:pl-0`}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+          /* FIX 2: overflow-hidden → overflow-visible so content is never clipped */
+          className="group relative w-full md:w-[45%] rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl p-6 md:p-10 overflow-visible transition-all duration-500 hover:border-cyan-400/30 hover:bg-white/[0.04] hover:shadow-[0_30px_100px_rgba(0,245,255,0.08)]"
+        >
+          {/* FIX 3: Glow effects wrapped in their own overflow-hidden container
+              so they stay clipped to the card but don't clip card content */}
+          <div className="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none">
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-400/10 blur-[80px] group-hover:bg-cyan-400/20 transition-colors duration-500" />
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/10 blur-[80px] group-hover:bg-purple-500/20 transition-colors duration-500" />
           </div>
-          <div className="flex-grow">
-            <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-tight leading-tight mb-1 group-hover:text-[#00F5FF] transition-colors">
-              {item.title}
-            </h3>
-            <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-black uppercase tracking-[0.2em] text-[rgba(240,244,255,0.35)] ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-               <span className="flex items-center gap-1.5"><Calendar size={12} className="text-[#7B2FBE]" /> {item.date}</span>
-               <span className="flex items-center gap-1.5"><MapPin size={12} className="text-[#7B2FBE]" /> {item.location}</span>
+
+          {/* Header Section */}
+          <div className="flex flex-col gap-8 relative  z-10">
+            <div className="flex items-center justify-between gap-4">
+              {/* Type Icon */}
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-white/[0.02] border border-white/10 flex items-center justify-center text-cyan-400 shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:border-cyan-400/40 group-hover:shadow-cyan-400/10">
+                {item.type === "education" ? (
+                  <GraduationCap size={28} strokeWidth={1.5} />
+                ) : (
+                  <Briefcase size={28} strokeWidth={1.5} />
+                )}
+              </div>
+
+              {/* Date Badge */}
+              <div className="px-4 py-1.5 rounded-full bg-cyan-400/5 border border-cyan-400/10 flex items-center gap-2">
+                <Calendar size={14} className="text-cyan-400" />
+                <span className="text-[11px] font-bold text-cyan-400/90 uppercase tracking-widest">{item.date}</span>
+              </div>
+            </div>
+
+            {/* Title & Location */}
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 tracking-tight leading-tight">
+                {item.title}
+              </h3>
+              <div className="flex items-center gap-2 text-white/40">
+                <MapPin size={14} className="text-purple-400" />
+                <span className="text-xs font-medium tracking-wide uppercase">{item.location}</span>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-white/60 leading-relaxed text-base md:text-lg font-light">
+              {item.description}
+            </p>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2.5 mt-2">
+              {item.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-4 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] transition-all duration-300 hover:border-cyan-400/30 hover:text-cyan-400 hover:bg-cyan-400/5"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-[rgba(240,244,255,0.55)] text-sm md:text-base leading-relaxed mb-8 font-medium">
-          {item.description}
-        </p>
-
-        {/* Tags */}
-        <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-          {item.tags.map(tag => (
-            <span key={tag} className="px-3 py-1.5 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-[rgba(240,244,255,0.4)] text-[9px] font-black uppercase tracking-widest hover:text-[#00F5FF] hover:border-[#00F5FF]/30 transition-all cursor-default">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Spacer for symmetrical layout */}
-      <div className="hidden md:block md:w-[45%]" />
+        </motion.div>
+      </div>
     </div>
   );
 };
@@ -83,58 +97,87 @@ const Experience = () => {
       type: "education",
       date: "2023 - Present",
       location: "Dinajpur, Bangladesh",
-      description: "Pursuing advanced technical education in computer science, focusing on algorithms, database management, and software engineering principles.",
-      tags: ["CS Foundations", "Data Structures", "Algorithms"]
+      description:
+        "Pursuing advanced technical education in computer science, focusing on algorithms, database management, and software engineering principles.",
+      tags: ["CS Foundations", "Data Structures", "Algorithms"],
     },
     {
       title: "MERN Stack Development",
       type: "experience",
       date: "2024",
       location: "Programming Hero",
-      description: "Intensive training and project-based learning in the MERN ecosystem. Mastered React, Node.js, Express, and MongoDB through complex full-stack builds.",
-      tags: ["React", "Node.js", "Express", "MongoDB"]
+      description:
+        "Intensive training and project-based learning in the MERN ecosystem. Mastered React, Node.js, Express, and MongoDB through complex full-stack builds.",
+      tags: ["React", "Node.js", "Express", "MongoDB"],
     },
     {
       title: "Marketing Expert",
       type: "experience",
       date: "2022 - 2023",
       location: "Programming Hero Platform",
-      description: "Leveraged technical knowledge to assist in marketing digital products, providing a unique bridge between product development and user acquisition.",
-      tags: ["Growth", "Digital Strategy", "User Experience"]
-    }
+      description:
+        "Leveraged technical knowledge to assist in marketing digital products, providing a unique bridge between product development and user acquisition.",
+      tags: ["Growth", "Digital Strategy", "User Experience"],
+    },
   ];
 
   return (
-    <section id="experience" className="relative">
-      {/* Premium Background Decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-[radial-gradient(circle,rgba(123,47,190,0.02)_0%,transparent_70%)] pointer-events-none" />
+    <section id="experience" className="relative py-24 md:py-40 overflow-hidden">
+      {/* Premium Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-purple-500/10 blur-[120px] rounded-full" />
+      </div>
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 mx-auto px-6 max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-24 md:mb-32">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center mb-24 md:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[10px] font-black uppercase tracking-[0.5em] text-[#00F5FF] mb-6 block"
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-cyan-400/5 border border-cyan-400/10 mb-8"
           >
-            My Progression
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight">
-            Journey & <span className="gradient-text">Experience</span>
-          </h2>
-          <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#7B2FBE] to-transparent mx-auto opacity-50" />
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-xs font-black text-cyan-400 uppercase tracking-[0.3em]">
+              My Progression
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]"
+          >
+            A Journey of <br />
+            <span className="bg-gradient-to-r from-cyan-400 via-white to-purple-400 bg-clip-text text-transparent">
+              Growth & Experience
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg text-white/50 leading-relaxed font-light px-4"
+          >
+            Building high-performance applications and mastering the digital craft through academic excellence and professional dedication.
+          </motion.p>
         </div>
 
-        {/* Timeline Container */}
+        {/* Timeline Grid */}
         <div className="relative">
-          {/* Vertical Timeline Line (Desktop Centered) */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#00F5FF20] to-transparent hidden md:block" />
+          {/* Main Timeline Line */}
+          <div className="absolute  left-[17px] md:left-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2">
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/50 via-purple-500/50 to-cyan-400/50 opacity-30" />
+          </div>
 
-          <div className="relative space-y-12 md:space-y-0">
-            {data.map((item, i) => (
-              <ExperienceItem key={i} item={item} index={i} />
+          <div className="flex m-4 flex-col">
+            {data.map((item, index) => (
+              <ExperienceItem key={index} item={item} index={index} />
             ))}
           </div>
         </div>

@@ -25,7 +25,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-[#050A14] pt-32 pb-16 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
+    <footer className="relative pt-32 pb-16 overflow-hidden border-t border-[rgba(255,255,255,0.05)]" style={{backgroundColor: '#050A14'}}>
       {/* Premium Background Glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[rgba(0,245,255,0.03)] blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[rgba(123,47,190,0.03)] blur-[150px] rounded-full pointer-events-none" />

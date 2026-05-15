@@ -22,7 +22,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="overflow-hidden">
+    <section id="about" className="overflow-hidden py-24 md:py-32 relative">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-32 items-center">
           {/* Left: Image & Stats */}

@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
+import { HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
 
 const ContactSection = () => {
   const formRef = useRef(null);
@@ -26,6 +32,7 @@ const ContactSection = () => {
 
       if (response.ok) {
         if (formRef.current) formRef.current.reset();
+
         if (window.Swal) {
           window.Swal.fire({
             icon: "success",
@@ -34,11 +41,14 @@ const ContactSection = () => {
             background: "#0f172a",
             color: "#f8fafc",
             confirmButtonColor: "#6366f1",
-            customClass: { popup: "rounded-3xl" },
+            customClass: {
+              popup: "rounded-[28px]",
+            },
           });
         }
       } else {
         const result = await response.json();
+
         setErrors(
           result.errors
             ? result.errors.map((err) => err.message)
@@ -53,236 +63,248 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center px-4 py-12 md:py-20 font-sans">
+    <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8 bg-[#020617]">
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-      {/* Background Orbs */}
-      <div className="absolute top-0 -left-20 w-72 h-72 bg-indigo-600/10 rounded-full blur-[100px]"></div>
-      <div className="absolute bottom-0 -right-20 w-72 h-72 bg-purple-600/10 rounded-full blur-[100px]"></div>
+      {/* Background Glow */}
+      <div className="absolute top-[-120px] left-[-120px] w-[320px] h-[320px] bg-indigo-600/20 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-120px] right-[-120px] w-[320px] h-[320px] bg-fuchsia-600/20 blur-[120px] rounded-full" />
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-10">
-        {/* Left Content */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="lg:col-span-5 flex flex-col justify-center space-y-6 md:space-y-8"
+          className="text-center mb-16"
         >
-          <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-4">
-              Let's{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
-                Connect
-              </span>
-            </h1>
-            <p className="text-slate-400 text-base md:text-lg max-w-md">
-              Have a vision? Let’s turn it into reality. Reach out via form or
-              my social channels.
-            </p>
-          </div>
+          <span className="inline-block px-4 py-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-300 text-xs tracking-[0.2em] uppercase font-semibold mb-5">
+            Contact Me
+          </span>
 
-          <div className="space-y-4 md:space-y-6">
-            <div className="flex items-center gap-4 group">
-              <div className="w-12 h-12 shrink-0 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center group-hover:bg-indigo-500 group-hover:scale-110 transition-all duration-300">
-                <svg
-                  className="w-5 h-5 text-indigo-400 group-hover:text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <div className="overflow-hidden">
-                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-                  Email
-                </p>
-                <p className="text-slate-200 text-sm md:text-base truncate">
-                  mamokim2005@gmail.com
-                </p>
-              </div>
-            </div>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+            Let’s Build Something{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+              Amazing
+            </span>
+          </h2>
 
-            <div className="flex items-center gap-4 group">
-              <div className="w-12 h-12 shrink-0 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 group-hover:scale-110 transition-all duration-300">
-                <svg
-                  className="w-5 h-5 text-emerald-400 group-hover:text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-                  Phone
-                </p>
-                <p className="text-slate-200 text-sm md:text-base">
-                  +880 1729434323
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            {/* Twitter / X */}
-            <a
-              href="https://x.com/AbdulMokim40428"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 transition-all"
-            >
-              <svg
-                className="w-5 h-5 text-slate-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </a>
-
-            {/* LinkedIn */}
-            <a
-              href="https://www.linkedin.com/in/abdul-mokim-810380352"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 transition-all"
-            >
-              <svg
-                className="w-5 h-5 text-slate-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-
-            {/* GitHub */}
-            <a
-              href="https://github.com/Mokim2005" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 transition-all"
-            >
-              <svg
-                className="w-5 h-5 text-slate-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-              </svg>
-            </a>
-          </div>
+          <p className="max-w-2xl mx-auto mt-5 text-slate-400 text-base sm:text-lg leading-relaxed">
+            Have a project idea, collaboration opportunity, or just want to say
+            hello? Feel free to reach out anytime.
+          </p>
         </motion.div>
 
-        {/* Right Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="lg:col-span-7"
-        >
-          <div className="bg-slate-900/50 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-3xl shadow-2xl relative">
-            {/* Message Icon - Fixed Placement */}
-            <div className="hidden md:block absolute -top-4 -right-4 bg-indigo-500 p-3 rounded-2xl shadow-lg shadow-indigo-500/50">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                />
-              </svg>
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Left Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="lg:col-span-5"
+          >
+            <div className="h-full rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 md:p-10 relative overflow-hidden">
+              {/* Inner Glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
+                  Ready to start your next project?
+                </h3>
+
+                <p className="text-slate-400 leading-relaxed mb-10">
+                  I’m always interested in exciting ideas, freelance
+                  opportunities, and creative collaborations.
+                </p>
+
+                {/* Contact Info */}
+                <div className="space-y-5">
+                  {/* Email */}
+                  <div className="group flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-all">
+                      <HiOutlineMail className="text-indigo-400 text-2xl" />
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500 font-semibold">
+                        Email
+                      </p>
+
+                      <p className="text-slate-200 text-sm sm:text-base break-all">
+                        mamokim2005@gmail.com
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="group flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-all">
+                      <HiOutlinePhone className="text-emerald-400 text-2xl" />
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500 font-semibold">
+                        Phone
+                      </p>
+
+                      <p className="text-slate-200 text-sm sm:text-base">
+                        +880 1729434323
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Socials */}
+                <div className="mt-10">
+                  <p className="text-slate-500 text-xs uppercase tracking-[0.2em] font-semibold mb-4">
+                    Follow Me
+                  </p>
+
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href="https://x.com/AbdulMokim40428"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-300 hover:bg-indigo-500 hover:text-white hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <FaXTwitter />
+                    </a>
+
+                    <a
+                      href="https://www.linkedin.com/in/abdul-mokim-810380352"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-300 hover:bg-indigo-500 hover:text-white hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <FaLinkedinIn />
+                    </a>
+
+                    <a
+                      href="https://github.com/Mokim2005"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-300 hover:bg-indigo-500 hover:text-white hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <FaGithub />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </motion.div>
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-slate-400 text-[11px] font-bold uppercase tracking-wider ml-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 transition-all"
-                    placeholder="Enter your name"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-slate-400 text-[11px] font-bold uppercase tracking-wider ml-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 transition-all"
-                    placeholder="name@email.com"
-                  />
-                </div>
+          {/* Right Side Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7"
+          >
+            <div className="relative h-full rounded-[32px] border border-white/10 bg-slate-900/70 backdrop-blur-2xl p-6 sm:p-8 md:p-10 overflow-hidden shadow-[0_0_50px_rgba(99,102,241,0.15)]">
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-fuchsia-500/5 pointer-events-none" />
+
+              {/* Floating Badge */}
+              <div className="hidden md:flex absolute top-6 right-6 px-4 py-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-300 text-xs font-semibold tracking-widest uppercase items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+                Available
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-slate-400 text-[11px] font-bold uppercase tracking-wider ml-1">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  required
-                  rows="4"
-                  className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 transition-all resize-none"
-                  placeholder="How can I help you?"
-                />
-              </div>
-
-              {errors.length > 0 && (
-                <div className="text-rose-400 text-xs py-2 bg-rose-500/5 rounded-lg px-3 border border-rose-500/20 italic">
-                  {errors[0]}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 py-3.5 rounded-xl text-white font-bold text-xs uppercase tracking-[0.15em] transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-indigo-600/20"
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="relative z-10 space-y-6"
               >
-                {submitting ? "Sending..." : "Send Message"}
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2.5"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <label className="text-slate-400 text-xs uppercase tracking-[0.2em] font-semibold">
+                      Your Name
+                    </label>
+
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="John Doe"
+                      className="w-full h-14 rounded-2xl border border-slate-800 bg-slate-950/50 px-5 text-slate-200 placeholder:text-slate-500 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label className="text-slate-400 text-xs uppercase tracking-[0.2em] font-semibold">
+                      Email Address
+                    </label>
+
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="name@email.com"
+                      className="w-full h-14 rounded-2xl border border-slate-800 bg-slate-950/50 px-5 text-slate-200 placeholder:text-slate-500 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="space-y-2">
+                  <label className="text-slate-400 text-xs uppercase tracking-[0.2em] font-semibold">
+                    Your Message
+                  </label>
+
+                  <textarea
+                    name="message"
+                    required
+                    rows="7"
+                    placeholder="Tell me about your project..."
+                    className="w-full rounded-2xl border border-slate-800 bg-slate-950/50 px-5 py-4 text-slate-200 placeholder:text-slate-500 outline-none resize-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all"
                   />
-                </svg>
-              </button>
-            </form>
-          </div>
-        </motion.div>
+                </div>
+
+                {/* Error */}
+                {errors.length > 0 && (
+                  <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-300">
+                    {errors[0]}
+                  </div>
+                )}
+
+                {/* Button */}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-[1.01] disabled:opacity-60"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {submitting ? "Sending..." : "Send Message"}
+
+                    <svg
+                      className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.5"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </span>
+
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/10"></div>
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
