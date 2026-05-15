@@ -97,7 +97,7 @@ const Hero = () => {
     { icon: <Github size={20} />, href: "https://github.com/Mokim2005" },
     {
       icon: <Linkedin size={20} />,
-      href: "https://www.linkedin.com/in/abdul-mokim-810380352",
+      href: "https://www.linkedin.com/in/abdul-mokim1/",
     },
     { icon: <Twitter size={20} />, href: "https://x.com/AbdulMokim40428" },
   ];
