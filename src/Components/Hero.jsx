@@ -178,21 +178,31 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 1.4 }}
               className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center mb-12"
             >
-              <a href="#projects" className="btn-primary min-w-[220px] group">
-                VIEW PROJECTS{" "}
-                <ArrowRight
-                  size={18}
-                  className="ml-2 group-hover:translate-x-1 transition-transform"
-                />
+              <a href="#projects" className="btn-primary min-w-[220px] group relative overflow-hidden">
+                <span className="relative overflow-hidden inline-flex items-center gap-2">
+                  <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                    VIEW PROJECTS <ArrowRight size={18} />
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                    VIEW PROJECTS <ArrowRight size={18} />
+                  </span>
+                </span>
               </a>
 
               <a
                 href="https://drive.google.com/file/d/10-Ygyjmht2I9pCCvmAqF00taZn93-9w8/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-outline min-w-[220px]"
+                className="btn-outline min-w-[220px] group relative overflow-hidden"
               >
-                VIEW RESUME
+                <span className="relative overflow-hidden">
+                  <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                    VIEW RESUME
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                    VIEW RESUME
+                  </span>
+                </span>
               </a>
             </motion.div>
 

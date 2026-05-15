@@ -96,10 +96,17 @@ const Navber = () => {
               href="https://mail.google.com/mail/u/0/#inbox"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative px-4 md:px-5 py-2 text-sm font-semibold text-white rounded-lg overflow-hidden"
+              className="relative px-4 md:px-5 py-2 text-sm font-semibold text-white rounded-lg overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600" />
-              <span className="relative z-10">Hire Me</span>
+              <span className="relative z-10 overflow-hidden">
+                <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  Hire Me
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  Hire Me
+                </span>
+              </span>
             </a>
           </div>
 
@@ -143,9 +150,16 @@ const Navber = () => {
                   href="https://mail.google.com/mail/u/0/#inbox"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-center mt-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold"
+                  className="block text-center mt-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold overflow-hidden group"
                 >
-                  Hire Me
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      Hire Me
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      Hire Me
+                    </span>
+                  </span>
                 </a>
 
               </div>

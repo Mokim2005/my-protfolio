@@ -82,7 +82,16 @@ const ProjectDetails = () => {
       <div className="min-h-screen bg-[#050A14] flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-white text-3xl font-bold mb-6">Project Not Found</h2>
-          <button onClick={() => navigate('/')} className="btn-primary">BACK TO HOME</button>
+          <button onClick={() => navigate('/')} className="btn-primary group relative overflow-hidden">
+            <span className="relative overflow-hidden">
+              <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                BACK TO HOME
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                BACK TO HOME
+              </span>
+            </span>
+          </button>
         </div>
       </div>
     );
@@ -104,7 +113,14 @@ const ProjectDetails = () => {
           className="flex items-center gap-2 text-[#00F5FF] font-bold mb-12 hover:translate-x-[-8px] transition-transform group"
         >
           <ArrowLeft size={20} className="group-hover:scale-125 transition-transform" /> 
-          <span className="text-xs tracking-[0.2em]">BACK TO PORTFOLIO</span>
+          <span className="relative overflow-hidden">
+            <span className="block text-xs tracking-[0.2em] transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              BACK TO PORTFOLIO
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center text-xs tracking-[0.2em] transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              BACK TO PORTFOLIO
+            </span>
+          </span>
         </motion.button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
@@ -134,11 +150,25 @@ const ProjectDetails = () => {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <a href={project.liveLink} target="_blank" rel="noreferrer" className="btn-primary flex items-center gap-2 min-w-[180px]">
-                  <ExternalLink size={18} /> LIVE DEMO
+                <a href={project.liveLink} target="_blank" rel="noreferrer" className="btn-primary flex items-center gap-2 min-w-[180px] group relative overflow-hidden">
+                  <span className="relative overflow-hidden inline-flex items-center gap-2">
+                    <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      <ExternalLink size={18} /> LIVE DEMO
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      <ExternalLink size={18} /> LIVE DEMO
+                    </span>
+                  </span>
                 </a>
-                <a href={project.clientLink} target="_blank" rel="noreferrer" className="btn-outline flex items-center gap-2 min-w-[180px]">
-                  <Github size={18} /> SOURCE CODE
+                <a href={project.clientLink} target="_blank" rel="noreferrer" className="btn-outline flex items-center gap-2 min-w-[180px] group relative overflow-hidden">
+                  <span className="relative overflow-hidden inline-flex items-center gap-2">
+                    <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      <Github size={18} /> SOURCE CODE
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      <Github size={18} /> SOURCE CODE
+                    </span>
+                  </span>
                 </a>
               </div>
             </motion.div>
@@ -187,8 +217,26 @@ const ProjectDetails = () => {
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to see the results?</h3>
           <p className="text-[rgba(240,244,255,0.5)] mb-10 text-lg">Check out the live deployment or browse the repository.</p>
           <div className="flex justify-center gap-6">
-            <a href={project.liveLink} target="_blank" rel="noreferrer" className="btn-primary min-w-[200px]">EXPERIENCE LIVE</a>
-            <a href={project.clientLink} target="_blank" rel="noreferrer" className="btn-outline min-w-[200px]">VIEW ON GITHUB</a>
+            <a href={project.liveLink} target="_blank" rel="noreferrer" className="btn-primary min-w-[200px] group relative overflow-hidden">
+              <span className="relative overflow-hidden">
+                <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  EXPERIENCE LIVE
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  EXPERIENCE LIVE
+                </span>
+              </span>
+            </a>
+            <a href={project.clientLink} target="_blank" rel="noreferrer" className="btn-outline min-w-[200px] group relative overflow-hidden">
+              <span className="relative overflow-hidden">
+                <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  VIEW ON GITHUB
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  VIEW ON GITHUB
+                </span>
+              </span>
+            </a>
           </div>
         </div>
       </div>

@@ -164,9 +164,16 @@ const Navbar = () => {
           <motion.div variants={itemVariants}>
             <a
               href="#contact"
-              className="px-6 py-3 rounded-xl border border-[#00F5FF]/30 text-white hover:text-black hover:bg-[#00F5FF] transition-all duration-300"
+              className="px-6 py-3 rounded-xl border border-[#00F5FF]/30 text-white hover:text-black hover:bg-[#00F5FF] transition-all duration-300 group relative overflow-hidden"
             >
-              HIRE ME
+              <span className="relative overflow-hidden">
+                <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  HIRE ME
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  HIRE ME
+                </span>
+              </span>
             </a>
           </motion.div>
         </div>

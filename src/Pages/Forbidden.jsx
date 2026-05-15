@@ -76,26 +76,53 @@ const Forbidden = () => {
         >
           <button
             onClick={handleGoHome}
-            className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all active:scale-95 flex items-center gap-2 group shadow-xl shadow-purple-600/20"
+            className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all active:scale-95 flex items-center gap-2 group shadow-xl shadow-purple-600/20 relative overflow-hidden"
           >
-            <svg
-              className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to Home
+            <span className="relative overflow-hidden inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+                Back to Home
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+                Back to Home
+              </span>
+            </span>
           </button>
 
-          <button className="px-8 py-3.5 bg-slate-900/70 text-slate-300 font-semibold border border-slate-700 rounded-xl hover:bg-slate-800 hover:text-white hover:border-purple-500/50 transition-all backdrop-blur-sm">
-            Report Issue
+          <button className="px-8 py-3.5 bg-slate-900/70 text-slate-300 font-semibold border border-slate-700 rounded-xl hover:bg-slate-800 hover:text-white hover:border-purple-500/50 transition-all backdrop-blur-sm group relative overflow-hidden">
+            <span className="relative overflow-hidden">
+              <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                Report Issue
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                Report Issue
+              </span>
+            </span>
           </button>
         </motion.div>
 

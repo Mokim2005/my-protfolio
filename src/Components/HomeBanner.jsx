@@ -229,20 +229,35 @@ const HomeBanner = () => {
               <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }}>
                 <NavLink
                   to="/my-project"
-                  className="hero-button-primary px-8 py-4 rounded-xl font-bold text-white text-center block"
+                  className="hero-button-primary px-8 py-4 rounded-xl font-bold text-white text-center block group"
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    View Projects
-                    <motion.svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </motion.svg>
+                  <span className="relative z-10 overflow-hidden">
+                    <span className="flex items-center justify-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      View Projects
+                      <motion.svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </motion.svg>
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      View Projects
+                      <motion.svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </motion.svg>
+                    </span>
                   </span>
                 </NavLink>
               </motion.div>
@@ -252,9 +267,16 @@ const HomeBanner = () => {
                   href="https://drive.google.com/file/d/10-Ygyjmht2I9pCCvmAqF00taZn93-9w8/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hero-button-secondary px-8 py-4 rounded-xl font-bold text-white text-center block"
+                  className="hero-button-secondary px-8 py-4 rounded-xl font-bold text-white text-center block group"
                 >
-                  View Resume
+                  <span className="relative overflow-hidden">
+                    <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      View Resume
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                      View Resume
+                    </span>
+                  </span>
                 </a>
               </motion.div>
             </motion.div>

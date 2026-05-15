@@ -29,9 +29,16 @@ const ProjectCard = ({ project, index }) => (
         </p>
         <Link 
           to={`/project/${project.id}`}
-          className="px-8 py-4 rounded-xl bg-[#00F5FF] text-[#050A14] font-black text-xs tracking-widest flex items-center justify-center gap-2 transform scale-90 group-hover:scale-100 transition-all duration-500 shadow-[0_0_30px_rgba(0,245,255,0.4)]"
+          className="px-8 py-4 rounded-xl bg-[#00F5FF] text-[#050A14] font-black text-xs tracking-widest flex items-center justify-center gap-2 transform scale-90 group-hover:scale-100 transition-all duration-500 shadow-[0_0_30px_rgba(0,245,255,0.4)] overflow-hidden"
         >
-          EXPLORE WORK <ArrowUpRight size={18} />
+          <span className="relative overflow-hidden inline-flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              EXPLORE WORK <ArrowUpRight size={18} />
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              EXPLORE WORK <ArrowUpRight size={18} />
+            </span>
+          </span>
         </Link>
       </div>
       
@@ -140,9 +147,16 @@ const Projects = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 px-10 py-5 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] text-white font-black text-xs tracking-widest hover:border-[#00F5FF]/40 hover:bg-[#00F5FF]/5 transition-all"
+            className="flex items-center gap-4 px-10 py-5 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] text-white font-black text-xs tracking-widest hover:border-[#00F5FF]/40 hover:bg-[#00F5FF]/5 transition-all group overflow-hidden"
           >
-            ALL PROJECTS <ArrowUpRight size={20} className="text-[#00F5FF]" />
+            <span className="relative overflow-hidden inline-flex items-center gap-4">
+              <span className="inline-flex items-center gap-4 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                ALL PROJECTS <ArrowUpRight size={20} className="text-[#00F5FF]" />
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center gap-4 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                ALL PROJECTS <ArrowUpRight size={20} className="text-[#00F5FF]" />
+              </span>
+            </span>
           </motion.a>
         </div>
 

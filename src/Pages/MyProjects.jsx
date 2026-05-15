@@ -225,15 +225,28 @@ const ProjectCard = ({ project, index }) => {
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={`w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r ${project.accent} text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out text-sm`}
+              className={`w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r ${project.accent} text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out text-sm group relative overflow-hidden`}
             >
-              Explore Project
-              <motion.div
-                animate={{ x: isHovered ? 5 : 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <ArrowRight size={18} />
-              </motion.div>
+              <span className="relative overflow-hidden inline-flex items-center gap-3">
+                <span className="inline-flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  Explore Project
+                  <motion.div
+                    animate={{ x: isHovered ? 5 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.div>
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-3 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  Explore Project
+                  <motion.div
+                    animate={{ x: isHovered ? 5 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.div>
+                </span>
+              </span>
             </motion.button>
           </Link>
         </div>

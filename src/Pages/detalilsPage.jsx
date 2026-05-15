@@ -157,9 +157,16 @@ const ProjectDetails = () => {
           <h2 className="text-2xl font-bold mb-4">Project Not Found</h2>
           <button
             onClick={() => navigate("/")}
-            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl text-white font-semibold hover:scale-105 transition-all"
+            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl text-white font-semibold hover:scale-105 transition-all group relative overflow-hidden"
           >
-            Return Home
+            <span className="relative overflow-hidden">
+              <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                Return Home
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                Return Home
+              </span>
+            </span>
           </button>
         </div>
       </motion.div>
@@ -189,7 +196,14 @@ const ProjectDetails = () => {
             size={18}
             className="group-hover:-translate-x-1 transition-transform"
           />
-          <span>Back to Projects</span>
+          <span className="relative overflow-hidden">
+            <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              Back to Projects
+            </span>
+            <span className="absolute inset-0 flex items-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+              Back to Projects
+            </span>
+          </span>
         </button>
       </motion.div>
 
@@ -366,17 +380,32 @@ const ProjectDetails = () => {
                 boxShadow: "0 20px 30px -10px rgba(16, 185, 129, 0.4)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:shadow-2xl transition-all duration-300 group"
+              className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:shadow-2xl transition-all duration-300 group overflow-hidden"
             >
-              <ExternalLink
-                size={18}
-                className="group-hover:rotate-12 transition-transform"
-              />
-              Live Demo
-              <Star
-                size={16}
-                className="opacity-0 group-hover:opacity-100 transition-opacity"
-              />
+              <span className="relative overflow-hidden inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <ExternalLink
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Live Demo
+                  <Star
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <ExternalLink
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Live Demo
+                  <Star
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
+                </span>
+              </span>
             </motion.a>
 
             <motion.a
@@ -388,13 +417,24 @@ const ProjectDetails = () => {
                 boxShadow: "0 20px 30px -10px rgba(59, 130, 246, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/50 transition-all duration-300 group"
+              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/50 transition-all duration-300 group overflow-hidden"
             >
-              <Github
-                size={18}
-                className="group-hover:rotate-12 transition-transform"
-              />
-              Frontend Code
+              <span className="relative overflow-hidden inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <Github
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Frontend Code
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <Github
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Frontend Code
+                </span>
+              </span>
             </motion.a>
 
             <motion.a
@@ -406,13 +446,24 @@ const ProjectDetails = () => {
                 boxShadow: "0 20px 30px -10px rgba(139, 92, 246, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300 group"
+              className="flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
             >
-              <Github
-                size={18}
-                className="group-hover:rotate-12 transition-transform"
-              />
-              Backend Code
+              <span className="relative overflow-hidden inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <Github
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Backend Code
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <Github
+                    size={18}
+                    className="group-hover:rotate-12 transition-transform"
+                  />
+                  Backend Code
+                </span>
+              </span>
             </motion.a>
           </div>
 

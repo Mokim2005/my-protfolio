@@ -104,7 +104,14 @@ const Footer = () => {
               whileHover={{ x: 10 }}
               className="inline-flex items-center gap-3 text-white font-black text-xs tracking-widest border-b-2 border-[#00F5FF] pb-2 hover:text-[#00F5FF] transition-all group"
             >
-              HIRE ABDUL MOKIM <ArrowUp className="rotate-45 group-hover:rotate-90 transition-transform" size={16} />
+              <span className="relative overflow-hidden inline-flex items-center gap-3">
+                <span className="inline-flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  HIRE ABDUL MOKIM <ArrowUp className="rotate-45 group-hover:rotate-90 transition-transform" size={16} />
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-3 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  HIRE ABDUL MOKIM <ArrowUp className="rotate-45 group-hover:rotate-90 transition-transform" size={16} />
+                </span>
+              </span>
             </motion.a>
           </div>
         </div>
@@ -133,7 +140,14 @@ const Footer = () => {
                <ArrowUp size={22} className="relative z-10" />
                <div className="absolute inset-0 rounded-full bg-[#00F5FF] opacity-0 group-hover:opacity-10 blur-md transition-opacity" />
             </div>
-            <span className="text-[9px] font-black uppercase tracking-[0.4em]">To Top</span>
+            <span className="relative overflow-hidden">
+              <span className="block text-[9px] font-black uppercase tracking-[0.4em] transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                To Top
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center text-[9px] font-black uppercase tracking-[0.4em] transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                To Top
+              </span>
+            </span>
           </motion.button>
         </div>
       </div>
