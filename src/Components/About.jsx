@@ -78,8 +78,8 @@ const About = () => {
               >
                 In Depth
               </motion.span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-tight">
-                Building Digital <br /><span className="gradient-text">Solutions</span>
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-tight gradient-text">
+                Building Digital <br />Solutions
               </h2>
               <p className="text-[rgba(240,244,255,0.8)] text-lg md:text-xl mb-16 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
                 Transforming ideas into scalable, user-centric applications. With a Diploma in Computer Science and rigorous training, I bring technical depth to every project.

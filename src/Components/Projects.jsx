@@ -128,8 +128,8 @@ const Projects = () => {
             >
               Featured Works
             </motion.span>
-            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-[1.05] tracking-tight">
-              Selected <br /><span className="gradient-text">Masterpieces</span>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-[1.05] tracking-tight gradient-text">
+              Selected <br />Masterpieces
             </h2>
           </div>
           <motion.a 

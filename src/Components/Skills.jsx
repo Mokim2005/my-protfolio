@@ -31,10 +31,11 @@ const SkillBadge = ({ name, icon, index }) => (
       backgroundColor: "rgba(0,245,255,0.08)",
       borderColor: "rgba(0,245,255,0.3)",
       boxShadow: "0 0 25px rgba(0,245,255,0.15)",
+      transition: { duration: 0.15, ease: "easeOut" },
     }}
-    className="group flex flex-col items-center gap-4 p-8 rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] transition-all duration-300"
+    className="group flex flex-col items-center gap-4 p-8 rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] transition-transform duration-150"
   >
-    <div className="text-4xl text-[rgba(240,244,255,0.7)] group-hover:text-[#00F5FF] group-hover:scale-110 transition-all duration-300">
+    <div className="text-4xl text-[rgba(240,244,255,0.7)] group-hover:text-[#00F5FF] group-hover:scale-110 transition-[color,transform] duration-200">
       {icon}
     </div>
     <span className="text-[rgba(240,244,255,0.85)] text-[10px] font-black uppercase tracking-widest group-hover:text-[#00F5FF] transition-colors">
