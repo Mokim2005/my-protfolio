@@ -178,12 +178,25 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 1.4 }}
               className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center mb-12"
             >
-              <a href="#projects" className="btn-primary min-w-[220px] group relative overflow-hidden">
+              <a
+                href="#projects"
+                className="btn-primary min-w-[220px] group relative overflow-hidden"
+              >
                 <span className="relative overflow-hidden inline-flex items-center gap-2">
-                  <span className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <span
+                    className="inline-flex items-center gap-2 transition-transform duration-500 group-hover:-translate-y-full"
+                    style={{
+                      transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                    }}
+                  >
                     VIEW PROJECTS <ArrowRight size={18} />
                   </span>
-                  <span className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <span
+                    className="absolute inset-0 flex items-center justify-center gap-2 transition-transform duration-500 translate-y-full group-hover:translate-y-0"
+                    style={{
+                      transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                    }}
+                  >
                     VIEW PROJECTS <ArrowRight size={18} />
                   </span>
                 </span>
@@ -196,16 +209,25 @@ const Hero = () => {
                 className="btn-outline min-w-[220px] group relative overflow-hidden"
               >
                 <span className="relative overflow-hidden">
-                  <span className="block transition-transform duration-500 group-hover:-translate-y-full" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <span
+                    className="block transition-transform duration-500 group-hover:-translate-y-full"
+                    style={{
+                      transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                    }}
+                  >
                     VIEW RESUME
                   </span>
-                  <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0" style={{ transitionTimingFunction: 'cubic-bezier(0.76,0,0.24,1)' }}>
+                  <span
+                    className="absolute inset-0 flex items-center justify-center transition-transform duration-500 translate-y-full group-hover:translate-y-0"
+                    style={{
+                      transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)",
+                    }}
+                  >
                     VIEW RESUME
                   </span>
                 </span>
               </a>
             </motion.div>
-
             {/* Social Links Stagger */}
             <div className="flex gap-4 justify-center lg:justify-start">
               {socialLinks.map((link, i) => (
@@ -218,12 +240,22 @@ const Hero = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 1.6 + i * 0.1 }}
                   whileHover={{
-                    y: -5,
-                    backgroundColor: "rgba(0,245,255,0.1)",
-                    borderColor: "rgba(0,245,255,0.4)",
+                    y: -6,
+                    scale: 1.08,
+                    backgroundColor: "rgba(0,245,255,0.08)",
+                    borderColor: "rgba(0,245,255,0.35)",
                     color: "#00F5FF",
+                    boxShadow: "0 10px 30px rgba(0,245,255,0.12)",
                   }}
-                  className="w-12 h-12 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[rgba(240,244,255,0.6)] transition-all"
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-xl 
+                 bg-white/5 
+                 border border-white/10 
+                 backdrop-blur-md
+                 flex items-center justify-center 
+                 text-white/60 
+                 hover:text-[#00F5FF]
+                 transition-all duration-300"
                 >
                   {link.icon}
                 </motion.a>
