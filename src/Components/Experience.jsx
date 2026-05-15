@@ -61,14 +61,14 @@ const ExperienceItem = ({ item, index }) => {
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 tracking-tight leading-tight">
                 {item.title}
               </h3>
-              <div className="flex items-center gap-2 text-white/40">
+                <div className="flex items-center gap-2 text-white/70">
                 <MapPin size={14} className="text-purple-400" />
                 <span className="text-xs font-medium tracking-wide uppercase">{item.location}</span>
               </div>
             </div>
 
             {/* Description */}
-            <p className="text-white/60 leading-relaxed text-base md:text-lg font-light">
+            <p             className="text-white/85 leading-relaxed text-base md:text-lg font-light">
               {item.description}
             </p>
 
@@ -77,7 +77,7 @@ const ExperienceItem = ({ item, index }) => {
               {item.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 text-[10px] font-bold text-white/40 uppercase tracking-[0.15em] transition-all duration-300 hover:border-cyan-400/30 hover:text-cyan-400 hover:bg-cyan-400/5"
+                  className="px-4 py-1.5 rounded-lg bg-white/[0.05] border border-white/10 text-[10px] font-bold text-white/70 uppercase tracking-[0.15em] transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-400 hover:bg-cyan-400/5"
                 >
                   {tag}
                 </span>
@@ -122,7 +122,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="relative py-24 md:py-40 overflow-hidden">
+    <section id="experience" className="relative py-24 md:py-40 overflow-hidden section-bg">
       {/* Premium Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />

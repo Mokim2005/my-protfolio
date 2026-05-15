@@ -43,7 +43,7 @@ const Footer = () => {
               <span className="text-white group-hover:text-[#00F5FF] transition-colors">MOKIM</span>
               <span className="text-[#00F5FF] animate-pulse">.</span>
             </motion.a>
-            <p className="text-[rgba(240,244,255,0.5)] text-base leading-relaxed mb-10 max-w-xs font-medium">
+            <p className="text-[rgba(240,244,255,0.75)] text-base leading-relaxed mb-10 max-w-xs font-medium">
               Architecting high-performance digital solutions with the modern MERN stack. Focused on scalability, clean code, and exceptional user experiences.
             </p>
             <div className="flex gap-4">
@@ -68,9 +68,9 @@ const Footer = () => {
             <ul className="space-y-5">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a 
+                <a 
                     href={link.href} 
-                    className="text-[rgba(240,244,255,0.5)] hover:text-[#00F5FF] text-sm font-bold transition-all flex items-center gap-4 group"
+                    className="text-[rgba(240,244,255,0.75)] hover:text-[#00F5FF] text-sm font-bold transition-all flex items-center gap-4 group"
                   >
                     <div className="w-0 h-[2px] bg-[#00F5FF] group-hover:w-6 transition-all duration-300" />
                     {link.label}
@@ -85,7 +85,7 @@ const Footer = () => {
             <h4 className="text-white font-bold uppercase tracking-[0.3em] text-[10px] mb-10 opacity-40">Core Expertise</h4>
             <ul className="space-y-5">
               {["Full Stack Systems", "MERN Ecosystem", "UI/UX Engineering", "API Architecture", "Performance Tuning"].map((item) => (
-                <li key={item} className="text-[rgba(240,244,255,0.5)] text-sm font-bold flex items-center gap-3">
+                <li key={item}               className="text-[rgba(240,244,255,0.75)] text-sm font-bold flex items-center gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#7B2FBE] opacity-40" />
                   {item}
                 </li>
@@ -96,7 +96,7 @@ const Footer = () => {
           {/* Global CTA */}
           <div className="lg:pl-5">
             <h4 className="text-white font-bold uppercase tracking-[0.3em] text-[10px] mb-10 opacity-40">Collaborate</h4>
-            <p className="text-[rgba(240,244,255,0.5)] text-sm mb-8 font-medium leading-relaxed">
+            <p className="text-[rgba(240,244,255,0.75)] text-sm mb-8 font-medium leading-relaxed">
               Available for freelance opportunities and full-time engineering roles.
             </p>
             <motion.a 

@@ -22,7 +22,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="overflow-hidden py-24 md:py-32 relative">
+    <section id="about"   className="overflow-hidden py-24 md:py-32 relative section-bg">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-32 items-center">
           {/* Left: Image & Stats */}
@@ -81,7 +81,7 @@ const About = () => {
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-tight">
                 Building Digital <br /><span className="gradient-text">Solutions</span>
               </h2>
-              <p className="text-[rgba(240,244,255,0.6)] text-lg md:text-xl mb-16 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+              <p className="text-[rgba(240,244,255,0.8)] text-lg md:text-xl mb-16 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
                 Transforming ideas into scalable, user-centric applications. With a Diploma in Computer Science and rigorous training, I bring technical depth to every project.
               </p>
 
@@ -100,7 +100,7 @@ const About = () => {
                     </div>
                     <div className="text-center sm:text-left">
                       <h4 className="text-xl font-bold text-white mb-3 group-hover:text-[#00F5FF] transition-colors uppercase tracking-tight">{step.title}</h4>
-                      <p className="text-[rgba(240,244,255,0.5)] text-sm leading-relaxed max-w-md">{step.description}</p>
+                      <p className="text-[rgba(240,244,255,0.75)] text-sm leading-relaxed max-w-md">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}

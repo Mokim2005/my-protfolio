@@ -63,7 +63,7 @@ const ProjectCard = ({ project, index }) => (
         {project.name}
       </h3>
 
-      <p className="text-[rgba(240,244,255,0.55)] text-base mb-8 leading-relaxed line-clamp-3 font-medium flex-grow">
+      <p       className="text-[rgba(240,244,255,0.8)] text-base mb-8 leading-relaxed line-clamp-3 font-medium flex-grow">
         {project.description}
       </p>
 
@@ -115,7 +115,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-24 md:py-32">
+    <section id="projects" className="py-24 md:py-32 section-bg">
       <div className="container">
         <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
           <div className="max-w-3xl text-center lg:text-left">

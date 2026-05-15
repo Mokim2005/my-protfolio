@@ -21,10 +21,10 @@ const SkillBadge = ({ name, icon, index }) => (
     }}
     className="group flex flex-col items-center gap-4 p-8 rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] transition-all duration-300"
   >
-    <div className="text-4xl text-[rgba(240,244,255,0.3)] group-hover:text-[#00F5FF] group-hover:scale-110 transition-all duration-300">
+    <div className="text-4xl text-[rgba(240,244,255,0.7)] group-hover:text-[#00F5FF] group-hover:scale-110 transition-all duration-300">
       {icon}
     </div>
-    <span className="text-[rgba(240,244,255,0.6)] text-[10px] font-black uppercase tracking-widest group-hover:text-white transition-colors">
+    <span className="text-[rgba(240,244,255,0.85)] text-[10px] font-black uppercase tracking-widest group-hover:text-[#00F5FF] transition-colors">
       {name}
     </span>
   </motion.div>
@@ -33,7 +33,7 @@ const SkillBadge = ({ name, icon, index }) => (
 const SkillCategory = ({ title, skills }) => (
   <div className="mb-20 last:mb-0">
     <div className="flex items-center gap-6 mb-12">
-      <h3 className="text-[#7B2FBE] text-xs uppercase tracking-[0.4em] font-black whitespace-nowrap">{title}</h3>
+      <h3 className="text-[#00F5FF] text-xs uppercase tracking-[0.4em] font-black whitespace-nowrap">{title}</h3>
       <div className="flex-grow h-px bg-gradient-to-r from-[rgba(123,47,190,0.2)] to-transparent" />
     </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
@@ -79,7 +79,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="skills" className="py-24 md:py-32 relative overflow-hidden section-bg">
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-[rgba(0,245,255,0.03)] blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container">
@@ -91,10 +91,10 @@ const Skills = () => {
           >
             Capabilities
           </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight text-white">
             Technical <span className="gradient-text">Arsenal</span>
           </h2>
-          <p className="text-[rgba(240,244,255,0.5)] text-lg md:text-xl leading-relaxed">
+          <p className="text-[rgba(240,244,255,0.75)] text-lg md:text-xl leading-relaxed">
             A comprehensive set of modern technologies I use to bring complex digital visions to life, from pixel-perfect frontends to robust backends.
           </p>
         </div>

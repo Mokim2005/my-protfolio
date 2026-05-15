@@ -63,7 +63,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8 bg-[#020617]">
+    <section className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       {/* Background Glow */}

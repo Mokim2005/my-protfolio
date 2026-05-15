@@ -71,14 +71,14 @@ const ServiceCard = ({ service, index }) => (
     </h3>
 
     {/* Description - Better line height and spacing */}
-    <p className="relative z-10 text-gray-400 group-hover:text-gray-200 text-lg leading-relaxed mb-10 transition-colors duration-300">
+    <p       className="relative z-10 text-[rgba(240,244,255,0.8)] group-hover:text-white text-lg leading-relaxed mb-10 transition-colors duration-300">
       {service.desc}
     </p>
 
     {/* Features List - Pushed to bottom with more spacing */}
     <ul className="relative z-10 space-y-5 mt-auto w-full pt-8 border-t border-white/10">
       {service.features.map((feature, i) => (
-        <li key={i} className="flex items-center gap-4 text-gray-400 group-hover:text-white text-base transition-colors duration-300">
+        <li key={i} className="flex items-center gap-4 text-[rgba(240,244,255,0.75)] group-hover:text-white text-base transition-colors duration-300">
           <span className="w-2 h-2 rounded-full bg-[#00F5FF] shadow-[0_0_12px_#00F5FF]" />
           {feature}
         </li>
@@ -89,7 +89,7 @@ const ServiceCard = ({ service, index }) => (
 
 const ServiceSection = () => {
   return (
-    <section id="services" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="services" className="py-24 md:py-32 relative overflow-hidden section-bg">
       <div className="container mx-auto px-6 max-w-7xl"> {/* max-w-7xl total layout-ke boro kore */}
         
         {/* Header Section */}

@@ -77,7 +77,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-bg"
     >
       {/* Glow Effects */}
       <div className="absolute top-0 left-0 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[rgba(0,245,255,0.04)] blur-[120px] rounded-full pointer-events-none" />
@@ -106,7 +106,7 @@ const Contact = () => {
               <span className="gradient-text">Greatness</span>
             </h2>
 
-            <p className="text-[rgba(240,244,255,0.55)] text-lg leading-relaxed max-w-xl font-medium mb-10">
+            <p               className="text-[rgba(240,244,255,0.8)] text-lg leading-relaxed max-w-xl font-medium mb-10">
               I'm currently available for freelance projects and full-time
               opportunities. If you have an idea you'd like to bring to life,
               let's chat.
