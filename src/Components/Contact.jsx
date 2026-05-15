@@ -120,7 +120,6 @@ const Contact = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-start">
-          
           {/* LEFT */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -139,8 +138,9 @@ const Contact = () => {
             </h2>
 
             <p className="text-[rgba(240,244,255,0.8)] text-lg leading-relaxed max-w-xl font-medium mb-10">
-              I'm currently available for freelance projects and full-time opportunities.
-              If you have an idea you'd like to bring to life, let's chat.
+              I'm currently available for freelance projects and full-time
+              opportunities. If you have an idea you'd like to bring to life,
+              let's chat.
             </p>
 
             <div className="space-y-4">
@@ -188,7 +188,6 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <div className="w-full rounded-[32px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] backdrop-blur-3xl p-7 sm:p-10 lg:p-12">
-
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-[2px] bg-[#00F5FF]" />
                 <h3 className="text-2xl font-bold text-white uppercase tracking-tight flex items-center gap-3">
@@ -198,22 +197,53 @@ const Contact = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <ContactField label="Full Name" name="name" placeholder="John Doe" />
-                <ContactField label="Email Address" name="email" type="email" placeholder="john@example.com" />
-                <ContactField label="Your Message" name="message" type="textarea" placeholder="How can I help you?" />
+                <ContactField
+                  label="Full Name"
+                  name="name"
+                  placeholder="John Doe"
+                />
+                <ContactField
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  placeholder="john@example.com"
+                />
+                <ContactField
+                  label="Your Message"
+                  name="message"
+                  type="textarea"
+                  placeholder="How can I help you?"
+                />
 
-                <button
-                  type="submit"
-                  className="w-full h-14 rounded-2xl bg-[#00F5FF] text-black font-black text-sm tracking-[0.2em] flex items-center justify-center gap-3 hover:scale-[1.01] transition-all duration-300 group"
-                >
-                  <Send size={18} />
-                  SEND SECURELY
-                </button>
+   <button
+  type="submit"
+  className="w-full h-14 sm:h-16 rounded-2xl bg-[#00F5FF] text-black font-black text-sm sm:text-base tracking-[0.2em] flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group relative overflow-hidden"
+>
+  <span className="relative inline-flex items-center gap-3 overflow-hidden">
+
+    {/* TOP TEXT (slide up on hover) */}
+    <span
+      className="inline-flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-full"
+      style={{ transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)" }}
+    >
+      <Send size={18} />
+      SEND SECURELY
+    </span>
+
+    {/* BOTTOM TEXT (slide in on hover) */}
+    <span
+      className="absolute inset-0 flex items-center justify-center gap-3 translate-y-full transition-transform duration-500 group-hover:translate-y-0"
+      style={{ transitionTimingFunction: "cubic-bezier(0.76,0,0.24,1)" }}
+    >
+      <Send size={18} />
+      SEND SECURELY
+    </span>
+
+  </span>
+</button>
               </form>
-
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
