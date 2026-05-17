@@ -207,7 +207,7 @@ const Footer = () => {
               © {currentYear} Abdul Mokim. All Rights Reserved.
             </p>
 
-            <p className="text-[rgba(240,244,255,0.2)] text-[9px] font-bold uppercase tracking-widest flex items-center justify-center md:justify-start gap-2">
+            <p className="text-gray-400 text-[9px] text-center font-bold uppercase tracking-widest flex items-center justify-center md:justify-start gap-2">
               Built with Passion{" "}
               <Heart size={10} className="text-[#00F5FF]" /> in Dinajpur, BD
             </p>
