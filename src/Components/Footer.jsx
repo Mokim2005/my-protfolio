@@ -40,7 +40,7 @@ const Footer = () => {
               whileHover={{ scale: 1.05 }}
               className="text-3xl font-black tracking-tighter group flex items-center gap-1 mb-8"
             >
-              <span className="text-white group-hover:text-[#00F5FF] transition-colors">MOKIM</span>
+              <span className="text-white group-hover:text-[#00F5FF] transition-colors">M.A. MOKIM</span>
               <span className="text-[#00F5FF] animate-pulse">.</span>
             </motion.a>
             <p className="text-[rgba(240,244,255,0.75)] text-base leading-relaxed mb-10 max-w-xs font-medium">
