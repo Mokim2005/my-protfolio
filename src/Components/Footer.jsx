@@ -57,7 +57,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative pt-24 pb-12 overflow-hidden border-t border-[rgba(255,255,255,0.05)]"
+      className="relative pt-10 pb-6 overflow-hidden border-t border-[rgba(255,255,255,0.05)]"
       style={{ backgroundColor: "#050A14" }}
     >
       {/* Premium Background Glows */}
@@ -198,10 +198,10 @@ const Footer = () => {
         </div>
 
         {/* Global Footer Divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.08)] to-transparent mb-10" />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.08)] to-transparent mb-2" />
 
         {/* Bottom Metadata */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-2">
           <div className="flex flex-col gap-1 text-center md:text-left">
             <p className="text-[rgba(240,244,255,0.3)] text-[10px] font-black uppercase tracking-[0.4em]">
               © {currentYear} Abdul Mokim. All Rights Reserved.
