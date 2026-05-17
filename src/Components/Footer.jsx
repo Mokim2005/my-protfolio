@@ -65,7 +65,7 @@ const Footer = () => {
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[rgba(123,47,190,0.03)] blur-[150px] rounded-full pointer-events-none" />
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-8">
           
           {/* Brand Identity */}
           <div className="lg:col-span-1">
