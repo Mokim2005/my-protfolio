@@ -294,7 +294,7 @@ const Hero = () => {
               </div>
 
               {/* Floating Badge */}
-              {/* <motion.div
+              <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{
                   duration: 4,
@@ -309,7 +309,7 @@ const Hero = () => {
                 <div className="text-[rgba(240,244,255,0.5)] text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
                  Real world Projects Completed
                 </div>
-              </motion.div> */}
+              </motion.div>
             </div>
           </motion.div>
         </div>
