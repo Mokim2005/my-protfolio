@@ -203,7 +203,7 @@ const Hero = () => {
               </a>
 
               <a
-                href="https://drive.google.com/file/d/10-Ygyjmht2I9pCCvmAqF00taZn93-9w8/view?usp=sharing"
+                href="https://drive.google.com/file/d/1QIquJx-RMC1FVZz2JptYDwMdGyBGfQfM/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline min-w-[220px] group relative overflow-hidden"

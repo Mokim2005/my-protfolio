@@ -264,7 +264,7 @@ const HomeBanner = () => {
 
               <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }}>
                 <a
-                  href="https://drive.google.com/file/d/10-Ygyjmht2I9pCCvmAqF00taZn93-9w8/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1QIquJx-RMC1FVZz2JptYDwMdGyBGfQfM/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hero-button-secondary px-8 py-4 rounded-xl font-bold text-white text-center block group"
