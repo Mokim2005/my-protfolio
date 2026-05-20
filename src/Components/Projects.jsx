@@ -80,7 +80,7 @@ const ProjectCard = ({ project, index }) => (
           View Details →
         </Link>
         <span className="text-[rgba(240,244,255,0.2)] text-[10px] font-black uppercase tracking-widest">
-          © 2024
+          © 2026
         </span>
       </div>
     </div>
